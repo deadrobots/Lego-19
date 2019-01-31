@@ -3,22 +3,26 @@ import os, sys
 from wallaby import *
 import constants as c
 import actions as a
-import camera as m
+import utils as u
+import drive as d
 
-#speed value should be no greater than 1400
-#drives lego foreward using ticks
-def tickDrive(time, speed1, speed2):
-    if speed1 > 1400:
-        print("speed too fast. please pick a number under 1401.")
-        speed1 = 1400
-    if speed1 > 1400:  # You are checking for "edge-cases" here. This is solid coding. Well done! - LMB
-        print("speed too fast. please pick a number under 1401.")
-        speed2 = 1400
-    mav(c.motorLeft, speed1)
-    mav(c.motorRight, speed2)
-    msleep(time)
+def init():
+    enable_servos()
+    u.move_servo(c.servoArm, c.armUp, 10)
+    print("moving arm up")
+    u.move_servo(c.servoClaw, c.clawOpen, 10)
+    print("opening claw")
+    u.move_servo(c.servoWrist, c.wristPipeVertical, 10)
+    print("moving wrist horizontal")
 
-def driveTillBlack():
-    while analog(c.tophat) < 3000
-        mav(1000)
-        mav(1000)
+
+def grabCluster():
+    u.move_servo(c.servoArm, c.armDown, 10)
+    d.driveTimed(30, 30, 1000)
+    u.move_servo(c.servoClaw, c.clawClosed, 5)
+    msleep(2000)
+    u.move_servo(c.servoArm, c.armUp, 20)
+    msleep(300)
+
+def driveToMC():
+    d.driveTimed(50, 50, 2000)
