@@ -5,6 +5,7 @@ import constants as c
 import actions as a
 import utils as u
 import drive as d
+import gyroDrive as g
 
 def init():
     enable_servos()
@@ -17,12 +18,16 @@ def init():
 
 
 def grabCluster():
+    print ("Grabbing cluster")
     u.move_servo(c.servoArm, c.armDown, 10)
-    d.driveTimed(30, 30, 1000)
+    g.drive_timed(30,1)
     u.move_servo(c.servoClaw, c.clawClosed, 5)
     msleep(2000)
     u.move_servo(c.servoArm, c.armUp, 20)
     msleep(300)
 
+
 def driveToMC():
-    d.driveTimed(50, 50, 2000)
+    print ("Driving to medical center")
+    g.drive_timed(50, 2)
+    g.pivot_on_left_wheel(50, 90)

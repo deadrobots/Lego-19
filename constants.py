@@ -4,6 +4,9 @@ import wallaby as w
 startTime = -1
 
 #motor values
+LEFT_MOTOR = 3
+RIGHT_MOTOR = 0
+
 LMOTOR = 3
 RMOTOR = 0
 
@@ -34,3 +37,8 @@ wristPipeHorizontal = 1900  #pipe held horizontally
 #claw
 clawOpen = 0
 clawClosed = 600
+
+
+#gyro
+bias = 0
+turn_conversion = 5500
