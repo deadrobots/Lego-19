@@ -13,6 +13,8 @@ def init():
     print("moving arm up")
     u.move_servo(c.servoClaw, c.clawOpen, 10)
     print("opening claw")
+    u.move_servo(c.servoArm, c.armDown, 10)
+    print("Moving arm down")
     u.move_servo(c.servoWrist, c.wristPipeVertical, 10)
     print("moving wrist horizontal")
 
@@ -29,10 +31,20 @@ def grabCluster():
 
 def driveToMC():
     print ("Driving to medical center")
-    g.drive_timed(50, 2.4)
-    g.pivot_on_left_wheel(50, 74)   #50, 90
-    d.timedLineFollowRight(4.5)
-
-
-
+    g.pivot_on_left_wheel(30, 90)
+    msleep(600)
+    d.square_up_black(50, 50)
+    msleep(600)
+    d.square_up_white(50, 50)
+    msleep(600)
+    d.square_up_black(60, 60)
+    msleep(600)
+    d.square_up_white(50, 50)
+    msleep(600)
+    g.pivot_on_right_wheel(70, 90)
+    # g.drive_timed(50, 2.4)
+    # g.pivot_on_left_wheel(50, 74)   #50, 90
+    # d.timedLineFollowRight(4.2)
+    # msleep(500) #do not take me out
+    # g.drive_distance(80, 18)
 

@@ -17,10 +17,11 @@ RIGHT_BUTTON = 13
 isClone = w.digital(CLONE_SWITCH)
 
 #Analog ports
-FRONT_TOPHAT = 0  #analog
+FRONT_TOPHAT_RIGHT = 0  #analog
+FRONT_TOPHAT_LEFT = 1
 
 #sensor values
-onBlack = 2000
+on_black = 2700
 
 #servo ports
 servoArm = 0

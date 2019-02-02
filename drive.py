@@ -3,6 +3,7 @@ from wallaby import *
 import wallaby as w  #pick one convention eventually
 import utils as u
 import constants as c
+import gyroDrive as g
 
 
 def driveTimed(left, right, time):
@@ -15,8 +16,8 @@ def sleep(time):
     driveTimed(0, 0, time)
 
 def drive(left, right):
-    motor(c.LMOTOR,left)
-    motor(c.RMOTOR,right)
+    motor(c.LEFT_MOTOR,left)
+    motor(c.RIGHT_MOTOR,right)
 
 def lineFollowLeft(time):
     sec = seconds()
@@ -69,7 +70,7 @@ def getWait():  # Used to break a loop after using "setWait". An example would b
 
 
 def onBlackFront():
-    return w.analog(c.FRONT_TOPHAT) > c.onBlack
+    return w.analog(c.FRONT_TOPHAT_RIGHT) > c.on_black
 
 
 def timedLineFollowLeft(time):
@@ -83,14 +84,37 @@ def timedLineFollowLeft(time):
 
 
 # Follows black line on right for specified amount of time
+# def timedLineFollowRight(time):
+#     sec = seconds() + time
+#     while seconds() < sec:
+#         if not onBlackFront():
+#             driveTimed(20, 90, 20)
+#         else:
+#             driveTimed(90, 20, 20)
+#         msleep(10)
+#     g._freeze_motors()
+
+
 def timedLineFollowRight(time):
     sec = seconds() + time
     while seconds() < sec:
-        if not onBlackFront():
-            driveTimed(20, 90, 20)
+        if analog(c.FRONT_TOPHAT_RIGHT) < 200:
+            motor(c.LEFT_MOTOR, 30)
+            motor(c.RIGHT_MOTOR, 100)
+        elif analog(c.FRONT_TOPHAT_RIGHT) < 800:
+            motor(c.LEFT_MOTOR, 60)
+            motor(c.RIGHT_MOTOR, 80)
+        elif analog(c.FRONT_TOPHAT_RIGHT) < 1400:
+            motor(c.LEFT_MOTOR, 80)
+            motor(c.RIGHT_MOTOR, 80)
+        elif analog(c.FRONT_TOPHAT_RIGHT) < 2000:
+            motor(c.LEFT_MOTOR, 80)
+            motor(c.RIGHT_MOTOR, 60)
         else:
-            driveTimed(90, 20, 20)
-        msleep(10)
+            motor(c.LEFT_MOTOR, 100)
+            motor(c.RIGHT_MOTOR,30)
+    g._freeze_motors()
+
 
 
 def timedLineFollowRightSmooth(time):
@@ -148,3 +172,36 @@ def crossBlackBack():
     while onBlackBack():  # wait for white
         pass
     ao()
+
+def on_black_right():
+    return analog(c.FRONT_TOPHAT_RIGHT) > c.on_black
+
+def on_black_left():
+    return analog(c.FRONT_TOPHAT_LEFT) > c.on_black
+
+
+def square_up_black(left_wheel_speed, right_wheel_speed): #Drives till black then saquares up
+    g._drive1(left_wheel_speed, right_wheel_speed)
+    while left_wheel_speed != 0 or right_wheel_speed != 0:
+        g._drive1(left_wheel_speed, right_wheel_speed)
+        if on_black_left():
+            left_wheel_speed = 0
+            g._drive1(left_wheel_speed, right_wheel_speed)
+        elif on_black_right():
+            right_wheel_speed = 0
+            g._drive1(left_wheel_speed, right_wheel_speed)
+
+
+def square_up_white(left_wheel_speed, right_wheel_speed): #Drives till white then saquares up
+    g._drive1(left_wheel_speed, right_wheel_speed)
+    while left_wheel_speed != 0 or right_wheel_speed != 0:
+        g._drive1(left_wheel_speed, right_wheel_speed)
+        if not on_black_left():
+            left_wheel_speed = 0
+            g._drive1(left_wheel_speed, right_wheel_speed)
+        elif not on_black_right():
+            right_wheel_speed = 0
+            g._drive1(left_wheel_speed, right_wheel_speed)
+
+
+
