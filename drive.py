@@ -181,15 +181,15 @@ def on_black_left():
 
 
 def square_up_black(left_wheel_speed, right_wheel_speed): #Drives till black then saquares up
-    g._drive1(left_wheel_speed, right_wheel_speed)
+    theta = g._drive1(left_wheel_speed, right_wheel_speed)
     while left_wheel_speed != 0 or right_wheel_speed != 0:
-        g._drive1(left_wheel_speed, right_wheel_speed)
+        theta = g._drive1(left_wheel_speed, right_wheel_speed)
         if on_black_left():
             left_wheel_speed = 0
-            g._drive1(left_wheel_speed, right_wheel_speed)
+            theta = g._drive1(left_wheel_speed, right_wheel_speed)
         elif on_black_right():
             right_wheel_speed = 0
-            g._drive1(left_wheel_speed, right_wheel_speed)
+            theta = g._drive1(left_wheel_speed, right_wheel_speed)
 
 
 def square_up_white(left_wheel_speed, right_wheel_speed): #Drives till white then saquares up

@@ -12,6 +12,7 @@ def main():
     a.init()
     u.waitForButton()
     a.grabCluster()
+    u.waitForButton()
     a.driveToMC()
 
 

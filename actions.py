@@ -9,6 +9,8 @@ import gyroDrive as g
 
 def init():
     enable_servos()
+    g.calibrate_gyro()
+    msleep(250)
     u.move_servo(c.servoArm, c.armUp, 10)
     print("moving arm up")
     u.move_servo(c.servoClaw, c.clawOpen, 10)
@@ -32,15 +34,13 @@ def grabCluster():
 def driveToMC():
     print ("Driving to medical center")
     g.pivot_on_left_wheel(30, 90)
+    u.waitForButton()
     msleep(600)
+    g.calibrate_gyro()
     d.square_up_black(50, 50)
-    msleep(600)
     d.square_up_white(50, 50)
-    msleep(600)
     d.square_up_black(60, 60)
-    msleep(600)
     d.square_up_white(50, 50)
-    msleep(600)
     g.pivot_on_right_wheel(70, 90)
     # g.drive_timed(50, 2.4)
     # g.pivot_on_left_wheel(50, 74)   #50, 90
