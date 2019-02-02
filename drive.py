@@ -1,5 +1,6 @@
 #!/usr/bin/python
 from wallaby import *
+import wallaby as w  #pick one convention eventually
 import utils as u
 import constants as c
 

@@ -16,9 +16,11 @@ RIGHT_BUTTON = 13
 
 isClone = w.digital(CLONE_SWITCH)
 
+#Analog ports
+FRONT_TOPHAT = 0  #analog
 
 #sensor values
-tophat = 0
+onBlack = 2000
 
 #servo ports
 servoArm = 0
@@ -27,7 +29,7 @@ servoClaw = 2
 
 #arm
 armUp = 1500
-armDown = 120  #start position
+armDown = 150  #start position
 armGrab = 200
 
 #wrist
@@ -41,4 +43,4 @@ clawClosed = 600
 
 #gyro
 bias = 0
-turn_conversion = 5500
+turn_conversion = 5200

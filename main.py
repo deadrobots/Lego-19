@@ -5,11 +5,12 @@ import constants as c
 import actions as a
 import utils as u
 import drive as d
+import gyroDrive as g
 
 
 def main():
     a.init()
-    #u.waitForButton()
+    u.waitForButton()
     a.grabCluster()
     a.driveToMC()
 

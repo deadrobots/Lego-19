@@ -6,7 +6,7 @@ import constants as c
 import utils as u
 
 
-INCHES_TO_TICKS = 319
+INCHES_TO_TICKS = 301
 
 def _clear_ticks():
     clear_motor_position_counter(c.RIGHT_MOTOR)
@@ -14,8 +14,8 @@ def _clear_ticks():
 
 
 def _freeze_motors():
-    freeze(c.LEFT_MOTOR)
-    freeze(c.RIGHT_MOTOR)
+    motor(c.LEFT_MOTOR, 0)
+    motor(c.RIGHT_MOTOR, 0)
 
 
 def _calibrate_gyro():
