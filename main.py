@@ -12,9 +12,10 @@ def main():
     a.init()
     u.waitForButton()
     a.grabCluster()
-    u.waitForButton()
     a.driveToMC()
-
+    a.dropOffCluster()
+    a.driveToFiremen()
+    a.dropOffFiremen()
 
 if __name__ == "__main__":
     sys.stdout = os.fdopen(sys.stdout.fileno(), "w", 0)

@@ -13,6 +13,7 @@ RMOTOR = 0
 # Digital ports
 CLONE_SWITCH = 9
 RIGHT_BUTTON = 13
+BUTTON = 0
 
 isClone = w.digital(CLONE_SWITCH)
 
@@ -22,6 +23,7 @@ FRONT_TOPHAT_LEFT = 1
 
 #sensor values
 on_black = 2700
+on_silver = 1800
 
 #servo ports
 servoArm = 0
@@ -29,9 +31,10 @@ servoWrist = 1
 servoClaw = 2
 
 #arm
-armUp = 1500
-armDown = 150  #start position
-armGrab = 200
+armUp = 1420
+armDown = 70  #start position
+armGrab = 120
+armDropOff = 550
 
 #wrist
 wristPipeVertical = 800  #pipe held vertically
@@ -39,7 +42,7 @@ wristPipeHorizontal = 1900  #pipe held horizontally
 
 #claw
 clawOpen = 0
-clawClosed = 600
+clawClosed = 700
 
 
 #gyro

@@ -141,10 +141,20 @@ def lineFollowRightSmoothCount(amount):
 def timedLineFollowLeftSmooth(time):
     sec = seconds() + time
     while seconds() < sec:
-        if onBlackFront():
+        if on_black_left():
             driveTimed(20, 40, 20)
         else:
             driveTimed(40, 20, 20)
+        msleep(10)
+
+
+def timedLineFollowRightSmooth(time):
+    sec = seconds() + time
+    while seconds() < sec:
+        if on_black_right():
+            driveTimed(40, 20, 20)
+        else:
+            driveTimed(20, 40, 20)
         msleep(10)
 
 
@@ -181,27 +191,35 @@ def on_black_left():
 
 
 def square_up_black(left_wheel_speed, right_wheel_speed): #Drives till black then saquares up
-    theta = g._drive1(left_wheel_speed, right_wheel_speed)
+    drive(left_wheel_speed, right_wheel_speed)
     while left_wheel_speed != 0 or right_wheel_speed != 0:
-        theta = g._drive1(left_wheel_speed, right_wheel_speed)
+        drive(left_wheel_speed, right_wheel_speed)
         if on_black_left():
             left_wheel_speed = 0
-            theta = g._drive1(left_wheel_speed, right_wheel_speed)
+            drive(left_wheel_speed, right_wheel_speed)
         elif on_black_right():
             right_wheel_speed = 0
-            theta = g._drive1(left_wheel_speed, right_wheel_speed)
+            drive(left_wheel_speed, right_wheel_speed)
+    g._freeze_motors()
 
 
 def square_up_white(left_wheel_speed, right_wheel_speed): #Drives till white then saquares up
-    g._drive1(left_wheel_speed, right_wheel_speed)
+    drive(left_wheel_speed, right_wheel_speed)
     while left_wheel_speed != 0 or right_wheel_speed != 0:
-        g._drive1(left_wheel_speed, right_wheel_speed)
+        drive(left_wheel_speed, right_wheel_speed)
         if not on_black_left():
             left_wheel_speed = 0
-            g._drive1(left_wheel_speed, right_wheel_speed)
+            drive(left_wheel_speed, right_wheel_speed)
         elif not on_black_right():
             right_wheel_speed = 0
-            g._drive1(left_wheel_speed, right_wheel_speed)
+            drive(left_wheel_speed, right_wheel_speed)
+    g._freeze_motors()
 
+
+def on_silver_right():
+    return analog(c.FRONT_TOPHAT_RIGHT) > c.on_silver
+
+def on_silver_left():
+    return analog(c.FRONT_TOPHAT_LEFT) > c.on_silver
 
 
