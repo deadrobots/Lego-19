@@ -28,7 +28,7 @@ def calibrate_gyro():
     c.bias = avg/i
     msleep(60)
 
-
+#The drive functions use the change in gyro_z to adjust wheel speeds and drive straight
 def drive_timed(speed, time):
     print("Driving for time")
     calibrate_gyro()
@@ -45,7 +45,7 @@ def drive_timed(speed, time):
         theta = theta + (gyro_z() - c.bias) * 10
     _freeze_motors()
 
-                                                  # All of these turn/pivots using the gyro to make the turn or pivot excact
+                                                  # All of these turn/pivots measure the change gyro_z to make the turn or pivot more excact
 def turn_with_gyro(left_wheel_speed, right_wheel_speed, target_theta_deg):
     calibrate_gyro()
     print("turning")
