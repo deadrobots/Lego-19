@@ -7,8 +7,8 @@ import gyroDrive as g
 
 
 def driveTimed(left, right, time):
-    motor(c.LMOTOR, left)
-    motor(c.RMOTOR, right)
+    motor(c.LEFT_MOTOR, left)
+    motor(c.RIGHT_MOTOR, right)
     msleep(time)
     ao()
 
@@ -197,7 +197,7 @@ def square_up_black(left_wheel_speed, right_wheel_speed): #Drives till black the
         if on_black_left():
             left_wheel_speed = 0
             drive(left_wheel_speed, right_wheel_speed)
-        elif on_black_right():
+        if on_black_right():
             right_wheel_speed = 0
             drive(left_wheel_speed, right_wheel_speed)
     g._freeze_motors()
@@ -210,7 +210,7 @@ def square_up_white(left_wheel_speed, right_wheel_speed): #Drives till white the
         if not on_black_left():
             left_wheel_speed = 0
             drive(left_wheel_speed, right_wheel_speed)
-        elif not on_black_right():
+        if not on_black_right():
             right_wheel_speed = 0
             drive(left_wheel_speed, right_wheel_speed)
     g._freeze_motors()

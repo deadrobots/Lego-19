@@ -6,7 +6,7 @@ import constants as c
 import utils as u
 
 
-INCHES_TO_TICKS = 301
+INCHES_TO_TICKS = 207 #201
 
 def _clear_ticks():
     clear_motor_position_counter(c.RIGHT_MOTOR)
@@ -25,7 +25,8 @@ def calibrate_gyro():
         avg = avg + gyro_z()
         msleep(1)
         i = i + 1
-    c.bias = avg/50
+    c.bias = avg/i
+    msleep(60)
 
 
 def drive_timed(speed, time):
@@ -94,7 +95,7 @@ def drive_distance(speed, distance):
     _clear_ticks()
     print("Driving for distance")
     theta = 0
-    while abs((get_motor_position_counter(c.RIGHT_MOTOR) + get_motor_position_counter(c.LEFT_MOTOR)/2)) < distance * INCHES_TO_TICKS:
+    while abs((get_motor_position_counter(c.RIGHT_MOTOR) + get_motor_position_counter(c.LEFT_MOTOR))/2) < distance * INCHES_TO_TICKS:
         if speed > 0:
             motor(c.RIGHT_MOTOR, int((speed - speed * (1.920137e-16 + 0.000004470956*theta))))
             motor(c.LEFT_MOTOR, int((speed + speed * (1.920137e-16 + 0.000004470956*theta))))

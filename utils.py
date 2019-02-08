@@ -4,8 +4,8 @@ import constants as c
 
 
 def driveTimed(left, right, time):
-    motor(c.LMOTOR, left)
-    motor(c.RMOTOR, right)
+    motor(c.LEFT_MOTOR, left)
+    motor(c.RIGHT_MOTOR, right)
     msleep(time)
     ao()
 
@@ -18,15 +18,15 @@ def waitForButton():
     msleep(1000)
 
 def DEBUG():
-    freeze(c.LMOTOR)
-    freeze(c.RMOTOR)
+    freeze(c.LEFT_MOTOR)
+    freeze(c.RIGHT_MOTOR)
     print('Program stop for DEBUG\nSeconds: ', seconds() - c.startTime)
     ao()
     exit(0)
 
 def DEBUGwithWait():
-    freeze(c.LMOTOR)
-    freeze(c.RMOTOR)
+    freeze(c.LEFT_MOTOR)
+    freeze(c.RIGHT_MOTOR)
     print ('Program stop for DEBUG\nSeconds: ', seconds() - c.startTime)
     ao()
     msleep(5000)
@@ -35,8 +35,8 @@ def sleep(time):
     driveTimed(0, 0, time)
 
 def drive(left, right):
-    motor(c.LMOTOR,left)
-    motor(c.RMOTOR,right)
+    motor(c.LEFT_MOTOR, left)
+    motor(c.RIGHT_MOTOR, right)
 
 # def lineFollowLeft(time):
 #     sec = seconds()

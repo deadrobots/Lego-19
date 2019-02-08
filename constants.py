@@ -7,8 +7,6 @@ startTime = -1
 LEFT_MOTOR = 3
 RIGHT_MOTOR = 0
 
-LMOTOR = 3
-RMOTOR = 0
 
 # Digital ports
 CLONE_SWITCH = 9
@@ -22,7 +20,7 @@ FRONT_TOPHAT_RIGHT = 0  #analog
 FRONT_TOPHAT_LEFT = 1
 
 #sensor values
-on_black = 2700
+on_black = 1800
 on_silver = 1800
 
 #servo ports
