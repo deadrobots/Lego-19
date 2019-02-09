@@ -51,15 +51,9 @@ def driveToMC():
     print ("Driving to medical center")
     g.pivot_on_left_wheel(50, 90)
     msleep(500)
-    g.drive_condition(70, d.on_black_right or d.on_black_left, False)   #squaring up on start box line
-    d.square_up_black(50, 50)
-    msleep(500)
-    g.drive_condition(70, d.on_black_right or d.on_black_left, True)
-    d.square_up_white(50, 50)
-    msleep(500)
-    g.drive_condition(70, d.on_black_right or d.on_black_left, False)    #squaring up on line next to water block
-    d.square_up_black(50, 50)
-    msleep(500)
+    d.drive_to_black_and_square_up(40)
+    d.drive_to_white_and_square_up(40)
+    d.drive_to_black_and_square_up(40)          #squaring up on line next to water block
     g.drive_distance(-50, 3.5)
     msleep(500)
     g.pivot_on_right_wheel(50, 90)      #turn to face silver line
@@ -75,20 +69,18 @@ def dropOffCluster():
     else:
         #g.drive_distance(50, 19)
         g.drive_distance(50, 15)         #driving towards silver line (tophats land just past silver line, on black)
-        g.drive_condition(70, d.on_black_right or d.on_black_left, True)    #square up on white (past black and silver line)
-        d.square_up_white(50, 50)
-        msleep(500)
+        d.drive_to_white_and_square_up(70)    #square up on white (past black and silver line)
         g.turn_with_gyro(0, 50, 60)         #wiggles to black line
         msleep(500)
         g.drive_distance(30, 3)
         msleep(250)
         g.turn_with_gyro(50, 0, 60)
         msleep(500)
-        d.timedLineFollowRightSmooth(4.2)       #line follows until there is almost no space between it and the pipe
+        d.timedLineFollowRightSmooth(4.4)       #line follows until there is almost no space between it and the pipe
         msleep(250)
-    u.waitForButton()
     g.turn_with_gyro(-50, 50, 90)           #turns and squares up on black
     msleep(100)
+    # d.drive_to_white_and_square_up(30)
     g.drive_condition(-30, d.on_black_right or d.on_black_left, True)
     d.square_up_black(-30, -30)
     msleep(500)
@@ -105,9 +97,7 @@ def dropOffCluster():
 def driveToFiremen():
     global leftBurning
     print("Driving to firemen")
-    g.drive_condition(-30, d.on_black_right or d.on_black_left, False)           #squares up on black
-    d.square_up_black(-30, -30)
-    msleep(500)
+    d.drive_to_black_and_square_up(-30)   #squares up on black
     g.drive_distance(50, 6)
     #g.turn_with_gyro(-50, 50, 90)
     g.pivot_on_left_wheel(50, 85)           #turns and drives forward to square up on black line
@@ -115,31 +105,20 @@ def driveToFiremen():
     u.waitForButton()
     g.drive_distance(-50, 2)
     msleep(500)
-    if leftBurning == 1:
-        #g.drive_distance(50, 10)
-        g.drive_condition(70, d.on_black_right or d.on_black_left, False)
-        d.square_up_black(50, 50)
-        msleep(500)
-        g.drive_condition(70, d.on_black_right or d.on_black_left, True)
-        d.square_up_white(50, 50)
-        msleep(500)
-    else:
+    if leftBurning == 1:       #switched code from else to left
         g.drive_distance(50, 3)
-        g.drive_condition(70, d.on_black_right or d.on_black_left, False)
-        d.square_up_black(50, 50)
-        msleep(500)
+        d.drive_to_black_and_square_up(70)
         u.waitForButton()
-        g.drive_condition(70, d.on_black_right or d.on_black_left, True)        #squares up
-        d.square_up_white(50, 50)
-        msleep(500)
+        d.drive_to_white_and_square_up(70)       #squares up
+    else:
+        d.drive_to_black_and_square_up(70)
+        d.drive_to_white_and_square_up(70)
         #g.drive_distance(50, 20)
     u.waitForButton()
     g.drive_distance(50, 4)
     msleep(500)
-    g.drive_condition(70, d.on_black_right, True)           #drives until the black line at the end of the medical center
-    d.square_up_black(50, 50)                               #complexes then squares up
-    msleep(500)
-
+    d.drive_to_black_and_square_up(-70) #True #drives until the black line at the end of the medical center
+                                                         #complexes then squares up
 
 def dropOffFiremen():
     global leftBurning

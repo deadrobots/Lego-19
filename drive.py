@@ -4,6 +4,7 @@ import wallaby as w  #pick one convention eventually
 import utils as u
 import constants as c
 import gyroDrive as g
+import drive as d
 
 
 def driveTimed(left, right, time):
@@ -203,7 +204,7 @@ def square_up_black(left_wheel_speed, right_wheel_speed): #Drives till black the
     g._freeze_motors()
 
 
-def square_up_white(left_wheel_speed, right_wheel_speed): #Drives till white then saquares up
+def square_up_white(left_wheel_speed, right_wheel_speed): #Drives till white then squares up
     drive(left_wheel_speed, right_wheel_speed)
     while left_wheel_speed != 0 or right_wheel_speed != 0:
         drive(left_wheel_speed, right_wheel_speed)
@@ -219,7 +220,19 @@ def square_up_white(left_wheel_speed, right_wheel_speed): #Drives till white the
 def on_silver_right():
     return analog(c.FRONT_TOPHAT_RIGHT) > c.on_silver
 
+
 def on_silver_left():
     return analog(c.FRONT_TOPHAT_LEFT) > c.on_silver
 
+
+def drive_to_black_and_square_up(speed):
+    g.drive_condition(speed, d.on_black_right or d.on_black_left, False)
+    d.square_up_black(50, 50)
+    msleep(500)
+
+
+def drive_to_white_and_square_up(speed):
+    g.drive_condition(speed, d.on_black_right or d.on_black_left, True)
+    d.square_up_white(50, 50)
+    msleep(500)
 
