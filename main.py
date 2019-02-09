@@ -14,8 +14,8 @@ def main():
     a.grabCluster()
     a.driveToMC()
     a.dropOffCluster()
-    a.driveToFiremen()
-    a.dropOffFiremen()
+    a.driveToFiretruck()
+    a.dropOffFiretruck()
 
 if __name__ == "__main__":
     sys.stdout = os.fdopen(sys.stdout.fileno(), "w", 0)
