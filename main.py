@@ -15,6 +15,7 @@ def main():
     a.driveToMC()
     a.dropOffCluster()
     a.driveToFiretruck()
+    a.pickUpFiretruck()
     a.dropOffFiretruck()
 
 if __name__ == "__main__":
