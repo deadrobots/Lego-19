@@ -9,11 +9,11 @@ RIGHT_MOTOR = 3
 
 
 # Digital ports
-CLONE_SWITCH = 9
+CLONE_SWITCH = 0
 RIGHT_BUTTON = 13
 BUTTON = 0
 
-isClone = False #w.digital(CLONE_SWITCH)
+isClone = w.digital(CLONE_SWITCH)
 isPrime = not isClone
 
 #Analog ports

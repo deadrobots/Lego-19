@@ -16,18 +16,24 @@ def init():    #align parts with lines on board, pom directly to the right of po
     else:
         print("Hi! I'm Prime.")
     enable_servos()
+    # test the motors
+    d.driveTimed(50, 50, 1000)
+    d.driveTimed(50, 0, 1000)
+    d.driveTimed(-50, 0, 1000)
+    print("testing claw")
+    u.move_servo(c.servoClaw, c.clawClosed)
+    u.move_servo(c.servoClaw, c.clawOpen)
+    print("testing arm")
+    u.move_servo(c.servoArm, c.armDown, 5)
+    u.move_servo(c.servoArm, c.armUp, 10)
+    print("testimg wrist")
+    u.move_servo(c.servoWrist, c.wristPipeVertical)
+    u.move_servo(c.servoWrist, c.wristPipeHorizontal)
+    print ("testing tophat")
     g.drive_condition(50, d.on_black_left, False)
     msleep(500)
     g.drive_condition(50, d.on_silver_right, True)
     msleep(500)
-    u.move_servo(c.servoClaw, c.clawOpen, 10)
-    print("opening claw")
-    u.move_servo(c.servoArm, c.armDown, 5)
-    print("Moving arm down")
-    u.move_servo(c.servoArm, c.armUp, 10)
-    print("moving arm up")
-    u.move_servo(c.servoWrist, c.wristPipeVertical, 10)
-    print("moving wrist horizontal")
 
 
 def grabCluster():
