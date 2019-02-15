@@ -27,14 +27,14 @@ def init():    #align parts with lines on board, pom directly to the right of po
     u.move_servo(c.servoArm, c.armDown, 5)
     u.move_servo(c.servoArm, c.armUp, 10)
     print("testimg wrist")
-    u.move_servo(c.servoWrist, c.wristPipeVertical)
-    u.move_servo(c.servoWrist, c.wristPipeHorizontal)
+    u.move_servo(c.servoWrist, c.wristVertical)
+    u.move_servo(c.servoWrist, c.wristHorizontal)
     print ("testing tophat")
     g.drive_condition(50, d.on_black_left, False)
     msleep(500)
     g.drive_condition(50, d.on_silver_right, True)
     msleep(500)
-
+    print("place in start posistion.")
 
 def grabCluster():
     global leftBurning
@@ -43,7 +43,7 @@ def grabCluster():
         if digital(c.BUTTON) == 1:
             leftBurning = 1
             print("The burning medical center is on the left")
-        print("waiting for create")        #waiting for Create to send MC order (which building is on fire)
+        print("Waiting for something to press button")        #waiting for Create to send MC order (which building is on fire)
         msleep(10)
     print ("Grabbing cluster")
     u.move_servo(c.servoArm, c.armDown, 10)  #grabbing cluster (fireman and water pom)

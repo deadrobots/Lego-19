@@ -3,7 +3,7 @@ import wallaby as w
 # Time
 startTime = -1
 
-#motor values
+# motor values
 LEFT_MOTOR = 0
 RIGHT_MOTOR = 3
 
@@ -37,8 +37,8 @@ if isClone: # Yellow Lego
     armDropOff = 550
 
     #wrist
-    wristPipeVertical = 800  #pipe held vertically
-    wristPipeHorizontal = 1900  #pipe held horizontally
+    wristHorizontal = 800  #pipe held vertically
+    wristVertical = 1900  #pipe held horizontally
 
     #claw
     clawOpen = 0
@@ -56,8 +56,8 @@ if isPrime: # Red Lego
     armDropOff = 550
 
     # wrist
-    wristPipeVertical = 870  # pipe held vertically
-    wristPipeHorizontal = 1970  # pipe held horizontally
+    wristHorizontal = 870  # wrist flat
+    wristVertical = 1970  # wrist with upper and lower sides of claw
 
     # claw
     clawOpen = 300

@@ -13,6 +13,7 @@ def main():
     u.waitForButton()
     a.grabCluster()
     a.driveToMC()
+    u.waitForButton()
     a.dropOffCluster()
     a.driveToFiretruck()
     a.pickUpFiretruck()
