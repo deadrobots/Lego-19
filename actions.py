@@ -16,6 +16,10 @@ def init():    #align parts with lines on board, pom directly to the right of po
     else:
         print("Hi! I'm Prime.")
     enable_servos()
+    msleep(500)
+    print("Don't touch me, I'm calibrating!!!")
+    g.calibrate_gyro()
+    msleep(500)
     # test the motors
     d.driveTimed(50, 50, 1000)
     d.driveTimed(50, 0, 1000)
@@ -26,25 +30,27 @@ def init():    #align parts with lines on board, pom directly to the right of po
     print("testing arm")
     u.move_servo(c.servoArm, c.armDown, 5)
     u.move_servo(c.servoArm, c.armUp, 10)
-    print("testimg wrist")
+    print("testing wrist")
     u.move_servo(c.servoWrist, c.wristVertical)
     u.move_servo(c.servoWrist, c.wristHorizontal)
-    print ("testing tophat")
+    print("testing tophat")
     g.drive_condition(50, d.on_black_left, False)
-    msleep(500)
     g.drive_condition(50, d.on_silver_right, True)
-    msleep(500)
-    print("place in start posistion.")
+    print("place in start posistion")
+    u.waitForButton()
 
 def grabCluster():
     global leftBurning
+    print("Waiting for something to press button")
     done = seconds() + 5.0
-    while seconds() < done:
+    while seconds() < done:  #waiting for Create to send MC order (which building is on fire)
         if digital(c.BUTTON) == 1:
-            leftBurning = 1
-            print("The burning medical center is on the left")
-        print("Waiting for something to press button")        #waiting for Create to send MC order (which building is on fire)
+            leftBurning = 0
         msleep(10)
+    if leftBurning == 1:
+        print("The burning medical center is on the left")
+    else:
+        print("The burning medical center is on the right")
     print ("Grabbing cluster")
     u.move_servo(c.servoArm, c.armDown, 10)  #grabbing cluster (fireman and water pom)
     g.drive_timed(60, 0.4)  #1
@@ -53,43 +59,33 @@ def grabCluster():
     u.move_servo(c.servoArm, c.armUp, 10)
     msleep(300)
     g.drive_distance(50, 2)
-    msleep(300)
-
 
 def driveToMC():
     print ("Driving to medical center")
     g.pivot_on_left_wheel(75, 90)
-    msleep(300)
-    d.drive_to_black_and_square_up(60)
-    d.drive_to_white_and_square_up(60)
-    d.drive_to_black_and_square_up(60)          #squaring up on line next to water block
-    g.drive_distance(-50, 3.5)
-    msleep(300)
+    d.drive_to_black_and_square_up(70)
+    d.drive_to_white_and_square_up(70)
+    d.drive_to_black_and_square_up(70)          #squaring up on line next to water block
+    g.drive_distance(-60, 3.5)
     g.pivot_on_right_wheel(50, 90)      #turn to face silver line
-    msleep(500)
-
 
 def dropOffCluster():
     global leftBurning
     print("Dropping off cluster")
-    g.drive_distance(50, 14)  # driving towards silver line (tophats land just past silver line, on black)]\
+    g.drive_distance(70, 14)  # driving towards silver line (tophats land just past silver line, on black)]\
     d.drive_to_white_and_square_up(70)  # square up on white (past black and silver line)
     if leftBurning == 1:
         if c.isClone:
-            g.drive_distance(50, 1)
+            g.drive_distance(60, 2)
         else:
             g.drive_distance(50, 1.5)
         g.turn_with_gyro(-50, 50, 90)  # turns and squares up on black
-        msleep(100)
         g.drive_distance(50, 6.3) #6.5
     else:
         #g.drive_distance(50, 19)
         g.turn_with_gyro(0, 50, 60)         #wiggles to black line
-        msleep(500)
         g.drive_distance(30, 3)
-        msleep(250)
         g.turn_with_gyro(50, 0, 60)
-        msleep(500)
         d.timedLineFollowRightSmooth(4.4)       #line follows until there is almost no space between it and the pipe
         msleep(250)
         g.turn_with_gyro(-50, 50, 90)           #turns and squares up on black
@@ -98,16 +94,16 @@ def dropOffCluster():
     d.square_up_black(-30, -30)
     msleep(500)
     # g.drive_distance(30, 1)
-    msleep(100)
     u.move_servo(c.servoArm, c.armDropOff, 5)   #drops off cluster
     msleep(250)
     u.move_servo(c.servoClaw, c.clawOpen, 3)
     msleep(250)
     u.move_servo(c.servoArm, c.armUp, 3)
+    print ("Delivered!")
     msleep(100)
     if c.isClone:
         if leftBurning == 1:
-            g.drive_distance(30, 1)
+            g.drive_distance(40, 1)
     else:
         g.drive_distance(30, 1)
 
@@ -128,12 +124,10 @@ def driveToFiretruck():
         g.pivot_on_left_wheel(50, 87)   #turns and drives forward to square up on black line
     else:
         g.pivot_on_left_wheel(50, 90)
-    msleep(100)
     g.drive_distance(-50, 4)
-    msleep(500)
-    if leftBurning == 1:    #switched code from else to left
+    if leftBurning == 1:                #switched code from else to left
         print("left burning routine")
-        d.drive_to_black_and_square_up(70)  #squares up
+        d.drive_to_black_and_square_up(70)
         msleep(500)
     else:
         print("right burning routine")
@@ -141,7 +135,6 @@ def driveToFiretruck():
         d.drive_to_white_and_square_up(70)
         #g.drive_distance(50, 20)
         g.drive_distance(50, 4)
-        msleep(500)
         d.drive_to_black_and_square_up(70) #True #drives until the black line at the end of the medical center
 
 
@@ -166,37 +159,29 @@ def pickUpFiretruck():
         pass
     else:
         g.drive_distance(25, 1.5)
-    u.move_servo(c.servoClaw, c.clawClosed, 5)
-    msleep(250)
-    u.move_servo(c.servoArm, c.armUp, 5)
-    msleep(250)
+    u.move_servo(c.servoClaw, c.clawClosed, 7)
+    msleep(100)
+    u.move_servo(c.servoArm, c.armUp, 7)        #picks up firetruck
+    msleep(100)
 
 
 def dropOffFiretruck():
+    print ("drop off firetruck")
     global leftBurning
     if leftBurning == 1:
         if c.isClone:
-            g.turn_with_gyro(30, -30, 10)
-            msleep(250)
-            g.drive_distance(70, 2)
-            d.drive_to_black_and_square_up(70)
-            u.waitForButton()
-            g.drive_distance(-50, 2)
-            msleep(250)
-            d.drive_to_black_and_square_up(-70)
+            g.turn_with_gyro(30, -30, 10)           #correcting turn to pick up firetruck
+            d.drive_to_white_and_square_up(70)
             msleep(250)
             g.turn_with_gyro(50, -50, 90)
-            u.waitForButton()
-            msleep(500)
             d.drive_till_black_right(-70)
-            u.waitForButton()
             g.drive_distance(-70, 4)
-            u.waitForButton()
             u.move_servo(c.servoArm, c.armDown, 5)  #delivering firetruck
-            u.waitForButton()
-            u.move_servo(c.servoClaw, c.clawOpen, 3)
-            u.waitForButton()
-            u.move_servo(c.servoArm, c.armUp, 3)
+            msleep(100)
+            u.move_servo(c.servoClaw, c.clawOpen, 6)
+            msleep(100)
+            msleep(100)
+            u.move_servo(c.servoArm, c.armUp, 6)
         else:
             g.drive_distance(50, 11)
             g.turn_with_gyro(-50, 50, 180)
@@ -208,12 +193,10 @@ def dropOffFiretruck():
             pass
         else:
             g.turn_with_gyro(-50, 50, 180)
-            msleep(600)
             g.drive_distance(50, 1)
             u.move_servo(c.servoArm, c.armDown, 5)  # delivering firetruck
             u.move_servo(c.servoClaw, c.clawOpen, 3)
             u.move_servo(c.servoArm, c.armUp, 3)
 
-    #Sunday to do: take out wait for buttons above, increase the speed of the drop off (and over all run)
-    #code for drop off of firetruck in right burning medical center
+    #Sunday: code for drop off of firetruck in right burning medical center, look for areas to speed up
     #if time, begin working on gas valve delivery (no longer doing firemen due to time and point oppotunities with both gas valves)
