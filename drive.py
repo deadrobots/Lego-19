@@ -226,14 +226,14 @@ def on_silver_left():
 
 
 def drive_to_black_and_square_up(speed):
-    msleep(500)
+    #msleep(500)
     g.drive_condition(speed, d.on_black_right or d.on_black_left, False)
-    d.square_up_black(50, 50)
+    d.square_up_black(speed/2, speed/2)
     msleep(250)
 
 
 def drive_to_white_and_square_up(speed):
-    msleep(500)
+    #msleep(500)
     g.drive_condition(50, d.on_black_right and d.on_black_left, True)
     g.drive_distance(50, 0.5)
     d.square_up_black(-50, -50)

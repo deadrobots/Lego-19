@@ -9,7 +9,7 @@ RIGHT_MOTOR = 3
 
 
 # Digital ports
-CLONE_SWITCH = 0
+CLONE_SWITCH = 9
 RIGHT_BUTTON = 13
 BUTTON = 0
 
@@ -34,15 +34,17 @@ if isClone: # Yellow Lego
     armUp = 1420
     armDown = 70  # start position
     armGrab = 120
-    armDropOff = 550
+    armValveGrab = 350
+    armDropOff = 600
 
     #wrist
-    wristHorizontal = 800  #pipe held vertically
-    wristVertical = 1900  #pipe held horizontally
+    wristHorizontal = 425  #pipe held vertically
+    wristVertical = 1525  #pipe held horizontally
 
     #claw
     clawOpen = 0
     clawClosed = 700
+    clawValve = 850
 
     #gyro
     bias = 0
@@ -51,7 +53,7 @@ if isClone: # Yellow Lego
 if isPrime: # Red Lego
     # arm
     armUp = 1420
-    armDown = 100  # start position
+    armDown = 300  # start position #was 100
     armGrab = 120
     armDropOff = 550
 
@@ -64,5 +66,4 @@ if isPrime: # Red Lego
     clawClosed = 1000
 
     # gyro
-    bias = 0
     turn_conversion = 5200
