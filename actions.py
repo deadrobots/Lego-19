@@ -10,7 +10,13 @@ import gyroDrive as g
 leftBurning = 1
 
 
-def init():    #align parts with lines on board, pom directly to the right of pom
+def init():   #Clone ---> #align parts with lines on board, pom directly to the right of pom
+    #Prime Setup: (The right one)
+    #The square up surface on the back of the bot should be flush to the back of the SB
+    #The left edge of the square up surface should be just to the left of the coupler
+    #I know. This puts LEGO and Create very close, but its necessary. :)
+    #
+    #^^^^ This setup needs to be fixed on clone
     if c.isClone:
         print("Hi! I'm Clone.")
     else:
@@ -20,6 +26,7 @@ def init():    #align parts with lines on board, pom directly to the right of po
     print("Don't touch me, I'm calibrating!!!")
     g.calibrate_gyro()
     msleep(500)
+    u.move_servo(c.servoArm, c.armDropOff, 10)
     # test the motors
     d.driveTimed(50, 50, 1000)
     d.driveTimed(50, 0, 1000)
@@ -32,7 +39,7 @@ def init():    #align parts with lines on board, pom directly to the right of po
     u.move_servo(c.servoClaw, c.clawOpen)
     print("testing tophat")
     g.drive_condition(50, d.on_black_left, False)
-    #g.drive_condition(50, d.on_silver_right, True)
+    g.drive_condition(50, d.on_silver_right, True)
     d.drive_to_white_and_square_up(50)
     print("testing arm")
     u.move_servo(c.servoArm, c.armUp, 10)
@@ -65,11 +72,11 @@ def grabCluster():
 def driveToMC():
     print ("Driving to medical center")
     g.pivot_on_left_wheel(75, 90)
-    #d.drive_to_black_and_square_up(70)
+    d.drive_to_black_and_square_up(70)
     d.drive_to_white_and_square_up(70)
     d.drive_to_black_and_square_up(70)          #squaring up on line next to water block
     g.drive_distance(-60, 3.5)
-    g.pivot_on_right_wheel(50, 90)      #turn to face silver line
+    g.pivot_on_right_wheel(50, 90) #turn to face silver line
 
 def dropOffCluster():
     global leftBurning
@@ -80,7 +87,7 @@ def dropOffCluster():
         if c.isClone:
             g.drive_distance(60, 2)
         else:
-            g.drive_distance(50, 1.5)
+            g.drive_distance(50, 3)
         g.turn_with_gyro(-50, 50, 90)  # turns and squares up on black
         g.drive_distance(50, 4) #6.3
     else:
@@ -95,7 +102,10 @@ def dropOffCluster():
     g.drive_condition(-30, d.on_black_right or d.on_black_left, True)
     d.square_up_black(-30, -30)
     msleep(500)
-    g.drive_distance(30, 0.5) #1
+    if c.isPrime:
+        g.drive_distance(30, 1) #1
+    else:
+        g.drive_distance(30, 0.5)  # 1
     u.move_servo(c.servoArm, c.armDropOff, 5)   #drops off cluster
     msleep(250)
     u.move_servo(c.servoClaw, c.clawOpen, 3)
@@ -160,7 +170,7 @@ def pickUpFiretruck():
     if c.isClone:
         pass
     else:
-        g.drive_distance(25, 1.5)
+        g.drive_distance(25, 2.5)
     u.move_servo(c.servoClaw, c.clawClosed, 7)
     msleep(100)
     u.move_servo(c.servoArm, c.armUp, 7)        #picks up firetruck
@@ -185,11 +195,24 @@ def dropOffFiretruck():
             msleep(100)
             u.move_servo(c.servoArm, c.armUp, 6)
         else:
-            g.drive_distance(50, 11)
-            g.turn_with_gyro(-50, 50, 180)
+            #This is a copy and paste of the current strategy for clone, but it doesn't work (at all)
+            #Please work to make these firetruck pick up and drop offs more consistent for P + C
+            d.drive_to_white_and_square_up(70)
+            msleep(250)
+            g.turn_with_gyro(50, -50, 90)
+            d.drive_till_black_right(-70)
+            g.drive_distance(-70, 3)  # was 4
             u.move_servo(c.servoArm, c.armDown, 5)  # delivering firetruck
-            u.move_servo(c.servoClaw, c.clawOpen, 3)
-            u.move_servo(c.servoArm, c.armUp, 3)
+            msleep(100)
+            u.move_servo(c.servoClaw, c.clawOpen, 6)
+            msleep(100)
+            msleep(100)
+            u.move_servo(c.servoArm, c.armUp, 6)
+           # g.drive_distance(50, 11)
+          #  g.turn_with_gyro(-50, 50, 180)
+            #u.move_servo(c.servoArm, c.armDown, 5)  # delivering firetruck
+           # u.move_servo(c.servoClaw, c.clawOpen, 3)
+          #  u.move_servo(c.servoArm, c.armUp, 3)
     else:   #right building on fire
         if c.isClone:
             g.turn_with_gyro(20, -20, 10)  # correcting turn to pick up firetruck

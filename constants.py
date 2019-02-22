@@ -53,17 +53,18 @@ if isClone: # Yellow Lego
 if isPrime: # Red Lego
     # arm
     armUp = 1420
-    armDown = 300  # start position #was 100
-    armGrab = 120
+    armDown = 150 #300 # start position #was 100
+   # armGrab = 120
     armDropOff = 550
 
     # wrist
-    wristHorizontal = 870  # wrist flat
-    wristVertical = 1970  # wrist with upper and lower sides of claw
+    wristHorizontal = 425 # wrist flat
+    wristVertical = 1525 # wrist with upper and lower sides of claw
 
     # claw
-    clawOpen = 300
-    clawClosed = 1000
+    clawOpen = 100
+    clawClosed = 900
+    clawValve = 950
 
     # gyro
     turn_conversion = 5200
