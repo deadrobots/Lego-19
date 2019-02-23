@@ -87,7 +87,7 @@ def dropOffCluster():
         if c.isClone:
             g.drive_distance(60, 2)
         else:
-            g.drive_distance(50, 3)
+            g.drive_distance(50, 2)  #3 (shortened because the delivery was too close to the edge)
         g.turn_with_gyro(-50, 50, 90)  # turns and squares up on black
         g.drive_distance(50, 4) #6.3
     else:
@@ -95,7 +95,7 @@ def dropOffCluster():
         g.turn_with_gyro(0, 50, 60)         #wiggles to black line
         g.drive_distance(30, 3)
         g.turn_with_gyro(50, 0, 60)
-        d.timedLineFollowRightSmooth(4.4)       #line follows until there is almost no space between it and the pipe
+        d.timedLineFollowRightSmooth(4.4) #line follows until there is almost no space between it and the pipe
         msleep(250)
         g.turn_with_gyro(-50, 50, 90)           #turns and squares up on black
         msleep(100)
@@ -158,7 +158,7 @@ def pickUpFiretruck():
     if c.isClone:
         g.turn_with_gyro(-25, 25, 10)
     else:
-        # g.turn_with_gyro(-30, 30, 10)
+        g.turn_with_gyro(-30, 30, 5)
         pass
     msleep(250)
     if c.isClone:
@@ -236,9 +236,17 @@ def dropOffFiretruck():
         else:
             g.turn_with_gyro(-50, 50, 180)
             g.drive_distance(50, 1)
+            u.waitForButton()
+            g.turn_with_gyro(-50, 50, 2)
+            u.waitForButton()
+            g.drive_distance(50, 2)
+            u.waitForButton()
             u.move_servo(c.servoArm, c.armDown, 5)  # delivering firetruck
             u.move_servo(c.servoClaw, c.clawOpen, 3)
             u.move_servo(c.servoArm, c.armUp, 3)
+            u.waitForButton()
+            g.drive_distance(-50, 2)
+            g.turn_with_gyro(50, -50, 2)
 
 
 def driveToValve():
