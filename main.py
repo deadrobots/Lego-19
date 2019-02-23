@@ -18,6 +18,8 @@ def main():
     a.pickUpFiretruck()
     a.dropOffFiretruck()
     a.driveToValve()
+    a.pickUpValve()
+    a.dropFirstValve()
     u.DEBUG()
 
 if __name__ == "__main__":

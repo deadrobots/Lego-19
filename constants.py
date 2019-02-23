@@ -55,16 +55,20 @@ if isPrime: # Red Lego
     armUp = 1420
     armDown = 150 #300 # start position #was 100
    # armGrab = 120
+    armValveGrab = 330
     armDropOff = 550
+    armValve = 1100
+    armValveDrop = 660
 
     # wrist
-    wristHorizontal = 425 # wrist flat
-    wristVertical = 1525 # wrist with upper and lower sides of claw
+    wristHorizontal = 60 #425 # wrist flat
+    wristVertical = 1150 #1525 # wrist with upper and lower sides of claw
+    wristFlipped = 2040
 
     # claw
     clawOpen = 100
     clawClosed = 900
-    clawValve = 950
+    clawValve = 1100
 
     # gyro
     turn_conversion = 5200

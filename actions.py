@@ -33,6 +33,10 @@ def init():   #Clone ---> #align parts with lines on board, pom directly to the 
     d.driveTimed(-50, 0, 1000)
     print("testing wrist")
     u.move_servo(c.servoWrist, c.wristVertical)
+    if c.isPrime:
+        msleep(300)
+        u.move_servo(c.servoWrist, c.wristFlipped)
+        msleep(300)
     u.move_servo(c.servoWrist, c.wristHorizontal)
     print("testing claw")
     u.move_servo(c.servoClaw, c.clawClosed)
@@ -87,7 +91,7 @@ def dropOffCluster():
         if c.isClone:
             g.drive_distance(60, 2)
         else:
-            g.drive_distance(50, 2)  #3 (shortened because the delivery was too close to the edge)
+            g.drive_distance(60, 2.3)  #2
         g.turn_with_gyro(-50, 50, 90)  # turns and squares up on black
         g.drive_distance(50, 4) #6.3
     else:
@@ -136,11 +140,12 @@ def driveToFiretruck():
         g.pivot_on_left_wheel(50, 90)   #turns and drives forward to square up on black line #was 87
     else:
         g.pivot_on_left_wheel(50, 90)
-    g.drive_distance(-50, 4)
+    #g.drive_distance(-50, 4)
     if leftBurning == 1:                #switched code from else to left
         print("left burning routine")
-        d.drive_to_black_and_square_up(70)
-        msleep(500)
+        #d.drive_to_black_and_square_up(70)
+        #msleep(500)
+        pass
     else:
         print("right burning routine")
         d.drive_to_black_and_square_up(70)
@@ -158,8 +163,10 @@ def pickUpFiretruck():
     if c.isClone:
         g.turn_with_gyro(-25, 25, 10)
     else:
-        g.turn_with_gyro(-30, 30, 5)
-        pass
+        if leftBurning:
+            pass
+        else:
+            g.turn_with_gyro(-30, 30, 6)
     msleep(250)
     if c.isClone:
         g.drive_distance(-50, 0.75) #1
@@ -199,6 +206,8 @@ def dropOffFiretruck():
             #Please work to make these firetruck pick up and drop offs more consistent for P + C
             d.drive_to_white_and_square_up(70)
             msleep(250)
+            g.drive_distance(70, 0.5)
+            msleep(100)
             g.turn_with_gyro(50, -50, 90)
             d.drive_till_black_right(-70)
             g.drive_distance(-70, 3)  # was 4
@@ -234,40 +243,81 @@ def dropOffFiretruck():
             u.move_servo(c.servoArm, c.armUp, 6)
 
         else:
+            g.turn_with_gyro(30, -30, 6)
+            msleep(100)
             g.turn_with_gyro(-50, 50, 180)
             g.drive_distance(50, 1)
-            u.waitForButton()
             g.turn_with_gyro(-50, 50, 2)
-            u.waitForButton()
             g.drive_distance(50, 2)
-            u.waitForButton()
             u.move_servo(c.servoArm, c.armDown, 5)  # delivering firetruck
+            g.turn_with_gyro(-50, 50, 10)       #rotates closer to building
             u.move_servo(c.servoClaw, c.clawOpen, 3)
             u.move_servo(c.servoArm, c.armUp, 3)
-            u.waitForButton()
-            g.drive_distance(-50, 2)
-            g.turn_with_gyro(50, -50, 2)
+            g.turn_with_gyro(50, -50, 10)       #rotates back
 
 
 def driveToValve():
     print("driving to valve")
     global leftBurning
     if leftBurning:
-        pass
+        g.drive_distance(70, 6.5)
+        msleep(100)
+        g.turn_with_gyro(70, -70, 90)
+        msleep(100)
+        u.move_servo(c.servoArm, c.armValveGrab, 10)
+        msleep(100)
+        g.drive_distance(70, 9)
+        msleep(100)
+        u.move_servo(c.servoWrist, c.wristHorizontal, 5)
+        d.timedLineFollowLeftSmooth(1.9) #4.5
+        msleep(100)
     else:
-        d.drive_to_black_and_square_up(50)
-        d.drive_to_white_and_square_up(70)
-        msleep(250)
-        g.pivot_on_right_wheel(70, 90)
-        msleep(250)
-        g.drive_distance(-70, 10)
-        u.waitForButton()
-        u.move_servo(c.servoArm, c.armValveGrab, 5)
-        g.drive_distance(30, 3.75) #was 4
-        msleep(250)
-        u.waitForButton()
-        u.move_servo(c.servoClaw, c.clawValve, 5)
-        u.move_servo(c.servoArm, c.armValveGrab + 200, 2)
-        u.waitForButton()
-        g.drive_distance(30, 0.5)
-        u.move_servo(c.servoArm, c.armUp, 2)
+        g.turn_with_gyro(70, -70, 34)
+        g.drive_distance(70, 7.2)
+        g.turn_with_gyro(-70, 70, 34)
+        u.move_servo(c.servoArm, c.armValveGrab, 20)
+        u.move_servo(c.servoWrist, c.wristHorizontal, 20)
+        d.timedLineFollowLeftSmooth(1.2)
+        g.turn_with_gyro(-20, 20, 5)
+        msleep(100)
+
+
+def pickUpValve():
+    print("picking up valve")
+    u.move_servo(c.servoClaw, c.clawValve, 10)
+    u.move_servo(c.servoArm, c.armDropOff, 10)
+    g.drive_distance(50, 0.5)
+    msleep(100)
+    u.move_servo(c.servoArm, c.armValve, 10)
+    u.move_servo(c.servoWrist, c.wristFlipped, 20)
+    # g.drive_distance(-70, 4)
+    # msleep(100)
+    g.turn_with_gyro(70, -70, 90)
+    msleep(100)
+    g.drive_distance(-30, 2)
+    d.drive_to_black_and_square_up(-30)
+    msleep(100)
+    g.drive_distance(95, 67)
+    msleep(100)
+
+def dropFirstValve():
+    g.turn_with_gyro(-50, 50, 90)
+    d.drive_to_black_and_square_up(-50)
+    g.drive_distance(-80, 25)
+    g.drive_distance(60, 5)
+    g.turn_with_gyro(30, -30, 90)
+    d.drive_to_black_and_square_up(70)
+    d.drive_to_white_and_square_up(70)
+    #This part below is what should be optimized
+    #It has worked but it's ugly
+    g.drive_distance(-60, 3.6)
+    g.turn_with_gyro(50, -50, 90)
+    g.drive_distance(-30, 3.9)
+    #u.waitForButton()
+    g.turn_with_gyro(30, -30, 25)
+    u.move_servo(c.servoArm, c.armValveDrop)
+    u.move_servo(c.servoWrist, c.wristVertical)
+    #u.waitForButton()
+    g.turn_with_gyro(-15, 15, 40)
+    u.move_servo(c.servoClaw, c.clawOpen)
+    g.drive_distance(-50, 5)

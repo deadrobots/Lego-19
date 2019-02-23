@@ -68,5 +68,5 @@ def move_servo(servo, endPos, speed=10):
         set_servo_position(servo, i)
         msleep(10)
     set_servo_position(servo, endPos)
-msleep(10)
+    msleep(10)
 
