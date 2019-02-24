@@ -347,7 +347,7 @@ def dropSecondValve():
     g.drive_distance(50, .25) #.5
     g.turn_with_gyro(-30, 30, 10)
     #Success! Currently finishes run at 121 seconds scoring 420 points
-    #Work on slight speed changes to cut down the one second
+    #Work on slight speed changes to cut down the 1 second
     #Make sure it works consistently
     #Start to brainstorm other things LEGO can do
 
