@@ -20,6 +20,8 @@ def main():
     a.driveToValve()
     a.pickUpValve()
     a.dropFirstValve()
+    a.grabSecondValve()
+    a.dropSecondValve()
     u.DEBUG()
 
 if __name__ == "__main__":
