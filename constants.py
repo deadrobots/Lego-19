@@ -53,7 +53,7 @@ if isClone: # Yellow Lego
 if isPrime: # Red Lego
     # arm
     armUp = 1420
-    armDown = 150 #300 # start position #was 100
+    armDown = 150 #300 # start position
    # armGrab = 120
     armValveGrab = 330
     armDropOff = 550
