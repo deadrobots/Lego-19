@@ -1,7 +1,7 @@
 import wallaby as w
 
 # Time
-startTime = -1
+start_time = -1
 
 # motor values
 LEFT_MOTOR = 0
@@ -13,8 +13,8 @@ CLONE_SWITCH = 9
 RIGHT_BUTTON = 13
 BUTTON = 0
 
-isClone = w.digital(CLONE_SWITCH)
-isPrime = not isClone
+is_clone = w.digital(CLONE_SWITCH)
+is_prime = not is_clone
 
 #Analog ports
 FRONT_TOPHAT_RIGHT = 0  #analog
@@ -25,50 +25,49 @@ on_black = 1800
 on_silver = 1800
 
 #servo ports
-servoArm = 0
-servoWrist = 1
-servoClaw = 2
+servo_arm = 0
+servo_wrist = 1
+servo_claw = 2
 
-if isClone: # Yellow Lego
+if is_clone: # Yellow Lego
     #arm
-    armUp = 1420
-    armDown = 70  # start position
-    armGrab = 120
-    armValveGrab = 350
-    armDropOff = 600
+    arm_up = 1420
+    arm_down = 70  # start position
+    arm_grab = 120
+    arm_valve_grab = 350
+    arm_drop_off = 600
 
     #wrist
-    wristHorizontal = 425  #pipe held vertically
-    wristVertical = 1525  #pipe held horizontally
+    wrist_horizontal = 425  #pipe held vertically
+    wrist_vertical = 1525  #pipe held horizontally
 
     #claw
-    clawOpen = 0
-    clawClosed = 700
-    clawValve = 850
+    claw_open = 0
+    claw_closed = 700
+    claw_valve = 850
 
     #gyro
-    bias = 0
     turn_conversion = 5200
 
-if isPrime: # Red Lego
+if is_prime: # Red Lego
     # arm
-    armUp = 1420
-    armDown = 150 #300 # start position
+    arm_up = 1420
+    arm_down = 150 #300 # start position
    # armGrab = 120
-    armValveGrab = 330
-    armDropOff = 550
+    arm_valve_grab = 330
+    arm_drop_off = 550
     armValve = 1100
     armValveDrop = 660
 
     # wrist
-    wristHorizontal = 60 #425 # wrist flat
-    wristVertical = 1150 #1525 # wrist with upper and lower sides of claw
+    wrist_horizontal = 60 #425 # wrist flat
+    wrist_vertical = 1150 #1525 # wrist with upper and lower sides of claw
     wristFlipped = 2040
 
     # claw
-    clawOpen = 100
-    clawClosed = 900
-    clawValve = 1100
+    claw_open = 100
+    claw_closed = 900
+    claw_valve = 1100
 
     # gyro
     turn_conversion = 5200

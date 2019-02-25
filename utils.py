@@ -20,14 +20,14 @@ def waitForButton():
 def DEBUG():
     freeze(c.LEFT_MOTOR)
     freeze(c.RIGHT_MOTOR)
-    print('Program stop for DEBUG\nSeconds: ', seconds() - c.startTime)
+    print('Program stop for DEBUG\nSeconds: ', seconds() - c.start_time)
     ao()
     exit(0)
 
 def DEBUGwithWait():
     freeze(c.LEFT_MOTOR)
     freeze(c.RIGHT_MOTOR)
-    print ('Program stop for DEBUG\nSeconds: ', seconds() - c.startTime)
+    print ('Program stop for DEBUG\nSeconds: ', seconds() - c.start_time)
     ao()
     msleep(5000)
 

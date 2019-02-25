@@ -156,7 +156,6 @@ def _drive1(lspeed, rspeed, theta = 0):
 def drive_timed1(lspeed, rspeed, time):
     #calibrate_gyro()
     print("Driving for time")
-    calibrate_gyro()
     start_time = seconds()
     theta = 0
     while seconds() - start_time < time:

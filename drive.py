@@ -20,7 +20,7 @@ def drive(left, right):
     motor(c.LEFT_MOTOR,left)
     motor(c.RIGHT_MOTOR,right)
 
-def lineFollowLeft(time):
+def line_follow_left(time):
     sec = seconds()
     while(seconds()-sec<time):
         if(u.onBlackFront()):
@@ -29,7 +29,7 @@ def lineFollowLeft(time):
             drive(70,40)#was 45
     drive(0,0)
 
-def lineFollowRight(time):
+def line_follow_right(time):
     sec = seconds()
     while(seconds()-sec<time):
         if(u.onBlackFront()):
@@ -39,7 +39,7 @@ def lineFollowRight(time):
     drive(0,0)
 
 
-def tickDrive(time, speed1, speed2):
+def tick_drive(time, speed1, speed2):
     if speed1 > 1400:
         print("speed too fast. please pick a number under 1401.")
         speed1 = 1400
@@ -51,7 +51,7 @@ def tickDrive(time, speed1, speed2):
     msleep(time)
 
 
-def driveTillBlack():
+def drive_till_black():
     while analog(c.tophat) < 3000:
         mav(1000)
         mav(1000)
@@ -61,42 +61,30 @@ def driveTillBlack():
 time = 0  # This represents how long to wait before breaking a loop.
 
 
-def setWait(DELAY):  # Sets wait time in seconds before breaking a loop.
+def set_wait(DELAY):  # Sets wait time in seconds before breaking a loop.
     global time
     time = seconds() + DELAY
 
 
-def getWait():  # Used to break a loop after using "setWait". An example would be: setWiat(10) | while true and getWait(): do something().
+def get_wait():  # Used to break a loop after using "setWait". An example would be: setWiat(10) | while true and getWait(): do something().
     return seconds() < time
 
 
-def onBlackFront():
+def on_black_front():
     return w.analog(c.FRONT_TOPHAT_RIGHT) > c.on_black
 
 
-def timedLineFollowLeft(time):
+def timed_line_follow_left(time):
     sec = seconds() + time
     while seconds() < sec:
-        if onBlackFront():
+        if on_black_front():
             driveTimed(20, 90, 20)
         else:
             driveTimed(90, 20, 20)
         msleep(10)
 
 
-# Follows black line on right for specified amount of time
-# def timedLineFollowRight(time):
-#     sec = seconds() + time
-#     while seconds() < sec:
-#         if not onBlackFront():
-#             driveTimed(20, 90, 20)
-#         else:
-#             driveTimed(90, 20, 20)
-#         msleep(10)
-#     g._freeze_motors()
-
-
-def timedLineFollowRight(time):
+def timed_line_follow_right(time):
     sec = seconds() + time
     while seconds() < sec:
         if analog(c.FRONT_TOPHAT_RIGHT) < 200:
@@ -118,20 +106,20 @@ def timedLineFollowRight(time):
 
 
 
-def timedLineFollowRightSmooth(time):
+def timed_line_follow_right_smooth(time):
     sec = seconds() + time
     while seconds() < sec:
-        if not onBlackFront():
+        if not on_black_front():
             driveTimed(20, 40, 20)
         else:
             driveTimed(40, 20, 20)
         msleep(10)
 
 
-def lineFollowRightSmoothCount(amount):
+def line_follow_right_smooth_count(amount):
     count = 0
     while count < amount:
-        if not onBlackFront():
+        if not on_black_front():
             driveTimed(10, 30, 10)
             count = count + 1
         else:
@@ -139,7 +127,7 @@ def lineFollowRightSmoothCount(amount):
             count = 0
 
 
-def timedLineFollowLeftSmooth(time):
+def timed_line_follow_left_smooth(time):
     sec = seconds() + time
     while seconds() < sec:
         if on_black_left():
@@ -159,7 +147,7 @@ def timedLineFollowRightSmooth(time):
         msleep(10)
 
 
-def timedLineFollowLeftBack(time):  # follows on starboard side
+def timed_line_follow_left_black(time):  # follows on starboard side
     sec = seconds() + time
     while seconds() < sec:
         if onBlackBack():
@@ -169,23 +157,17 @@ def timedLineFollowLeftBack(time):  # follows on starboard side
         msleep(10)
 
 
-def crossBlackFront():
-    while not onBlackFront():  # wait for black
+def cross_black_front():
+    while not on_black_front():  # wait for black
         pass
-    while onBlackFront():  # wait for white
+    while on_black_front():  # wait for white
         pass
     ao()
 
-
-def crossBlackBack():
-    while not onBlackBack():  # wait for black
-        pass
-    while onBlackBack():  # wait for white
-        pass
-    ao()
 
 def on_black_right():
     return analog(c.FRONT_TOPHAT_RIGHT) > c.on_black
+
 
 def on_black_left():
     return analog(c.FRONT_TOPHAT_LEFT) > c.on_black
