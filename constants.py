@@ -32,14 +32,17 @@ servo_claw = 2
 if is_clone: # Yellow Lego
     #arm
     arm_up = 1420
-    arm_down = 70  # start position
-    arm_grab = 120
+    arm_down = 160  # start position
+    #arm_grab = 120
     arm_valve_grab = 350
-    arm_drop_off = 600
+    arm_drop_off = 550
+    armValve = 1100
+    armValveDrop = 660
 
     #wrist
-    wrist_horizontal = 425  #pipe held vertically
-    wrist_vertical = 1525  #pipe held horizontally
+    wrist_horizontal = 0 #425  #pipe held vertically
+    wrist_vertical = 1030 #1525  #pipe held horizontally
+    wristFlipped = 2040 #Untested value
 
     #claw
     claw_open = 0
@@ -52,7 +55,7 @@ if is_clone: # Yellow Lego
 if is_prime: # Red Lego
     # arm
     arm_up = 1420
-    arm_down = 150 #300 # start position
+    arm_down = 160 #300 # start position
    # armGrab = 120
     arm_valve_grab = 330
     arm_drop_off = 550
