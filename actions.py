@@ -112,19 +112,17 @@ def drive_to_firetruck():
     print("Driving to firetruck")
     d.drive_to_black_and_square_up(-90)   #squares up on black
     if left_burning == 1:
-        g.drive_distance(90, 3.5)
-    else:
-        g.drive_distance(90, 5.5)
-    g.pivot_on_left_wheel(90, 90)
-    if left_burning == 1:                #switched code from else to left
         print("left burning routine")
-        pass
+        g.drive_distance(90, 3.5)
+        g.pivot_on_left_wheel(90, 90)
     else:
         print("right burning routine")
+        g.drive_distance(90, 5.5)
+        g.pivot_on_left_wheel(90, 90)
         d.drive_to_black_and_square_up(95)
         d.drive_to_white_and_square_up(95)
         g.drive_distance(95, 4)
-        d.drive_to_black_and_square_up(95) #True #drives until the black line at the end of the medical center
+        d.drive_to_black_and_square_up(95)  # True #drives until the black line at the end of the medical center
 
 
 def pick_up_firetruck():
@@ -134,7 +132,10 @@ def pick_up_firetruck():
     if left_burning:
         pass
     else:
-        g.turn_with_gyro(-80, 80, 5)
+        if c.is_prime :
+            g.turn_with_gyro(-80, 80, 5)
+        else:
+            g.turn_with_gyro(-80, 80, 4)
     g.drive_distance(-80, 2.5)
     u.move_servo(c.servo_arm, c.arm_down, 15)
     g.drive_distance(80, 2.5)
@@ -143,59 +144,27 @@ def pick_up_firetruck():
 
 
 def drop_off_firetruck():
-    print ("drop off firetruck")
+    print("drop off firetruck")
     global left_burning
     if left_burning == 1:
-        if c.is_clone:
-            g.turn_with_gyro(20, -20, 10)           #correcting turn to pick up firetruck
-            d.drive_to_white_and_square_up(70)
-            msleep(250)
-            g.turn_with_gyro(50, -50, 90)
-            d.drive_till_black_right(-70)
-            g.drive_distance(-70, 3) #was 4
-            u.move_servo(c.servo_arm, c.arm_down, 5)  #delivering firetruck
-            msleep(100)
-            u.move_servo(c.servo_claw, c.claw_open, 6)
-            msleep(100)
-            u.move_servo(c.servo_arm, c.arm_up, 6)
-        else:
-            d.drive_to_white_and_square_up(80)
-            g.drive_distance(70, 0.5)
-            g.turn_with_gyro(60, -60, 90)
-            d.drive_till_black_right(-70)
-            g.drive_distance(-80, 3)  # was 4
-            u.move_servo(c.servo_arm, c.arm_down, 10)  # delivering firetruck
-            u.move_servo(c.servo_claw, c.claw_open, 6)
-            u.move_servo(c.servo_arm, c.arm_up, 12)
+        d.drive_to_white_and_square_up(80)
+        g.drive_distance(70, 0.5)
+        g.turn_with_gyro(60, -60, 90)
+        d.drive_till_black_right(-70)
+        g.drive_distance(-80, 3)  # was 4
+        u.move_servo(c.servo_arm, c.arm_down, 10)  # delivering firetruck
+        u.move_servo(c.servo_claw, c.claw_open, 6)
+        u.move_servo(c.servo_arm, c.arm_up, 12)
     else:   # right building on fire
-        if c.is_clone:
-            g.turn_with_gyro(20, -20, 10)  # correcting turn to pick up firetruck
-            d.drive_to_white_and_square_up(70)
-            msleep(250)
-            g.drive_distance(-50, 6)
-            msleep(250)
-            #d.drive_to_white_and_square_up(-70)
-            d.drive_to_black_and_square_up(-70)
-            msleep(250)
-            g.turn_with_gyro(50, -50, 90)
-            d.drive_till_black_right(-70)
-            g.drive_distance(-70, 3)  # was 4
-            u.move_servo(c.servo_arm, c.arm_down, 5)  # delivering firetruck
-            msleep(100)
-            u.move_servo(c.servo_claw, c.claw_open, 6)
-            msleep(100)
-            msleep(100)
-            u.move_servo(c.servo_arm, c.arm_up, 6)
-        else:
-            g.turn_with_gyro(-60, 60, 170)  ###174
-            g.drive_distance(80, 1)
-            g.turn_with_gyro(-80, 80, 2)
-            g.drive_distance(90, 2)
-            u.move_servo(c.servo_arm, c.arm_down, 15)  # delivering firetruck
-            g.turn_with_gyro(-80, 80, 10)   # rotates closer to building
-            u.move_servo(c.servo_claw, c.claw_open, 12)
-            u.move_servo(c.servo_arm, c.arm_up, 20)
-            g.turn_with_gyro(80, -80, 10)   # rotates back
+        g.turn_with_gyro(-60, 60, 170)
+        g.drive_distance(80, 1)
+        g.turn_with_gyro(-80, 80, 2)
+        g.drive_distance(90, 2)
+        u.move_servo(c.servo_arm, c.arm_down, 15)  # delivering firetruck
+        g.turn_with_gyro(-80, 80, 10)   # rotates closer to building
+        u.move_servo(c.servo_claw, c.claw_open, 12)
+        u.move_servo(c.servo_arm, c.arm_up, 20)
+        g.turn_with_gyro(80, -80, 10)   # rotates back
 
 
 def drive_to_valve():
@@ -214,7 +183,10 @@ def drive_to_valve():
         g.drive_distance(80, 7.2)
         g.turn_with_gyro(-80, 80, 34)
         u.move_servo(c.servo_arm, c.arm_valve_grab, 20)
-        d.timed_line_follow_left_smooth(1.1)
+        if c.is_prime:
+            d.timed_line_follow_left_smooth(1.1)
+        else:
+            d.timed_line_follow_left_smooth(1.6)
         g.turn_with_gyro(-80, 80, 5)
         g.drive_distance(80, .4)
 

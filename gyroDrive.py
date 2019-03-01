@@ -1,12 +1,14 @@
 #!/usr/bin/python
 from wallaby import *
-import constants as c
 import math
 import constants as c
 import utils as u
 
+if c.is_prime:
+    INCHES_TO_TICKS = 207
+else:
+    INCHES_TO_TICKS = 218
 
-INCHES_TO_TICKS = 207 #201
 
 bias = 0
 
