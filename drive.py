@@ -209,7 +209,8 @@ def on_silver_left():
 
 def drive_to_black_and_square_up(speed):
     #msleep(500)
-    g.drive_condition(speed, d.on_black_right or d.on_black_left, False)
+    g.drive_condition(speed, d.on_black_right or d.on_black_left, False)    # Drives while neither tophat sees black
+    print('SAW BLACK!!!')
     d.square_up_black(speed/2, speed/2)
     msleep(250)
 
