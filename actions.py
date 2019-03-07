@@ -119,7 +119,7 @@ def drive_to_firetruck():
         g.pivot_on_left_wheel(90, 90)
     else:
         print("right burning routine")
-        g.drive_distance(90, 5.5)
+        g.drive_distance(90, 5.1) #5.5
         g.pivot_on_left_wheel(90, 90)
         d.drive_to_black_and_square_up(95)
         d.drive_to_white_and_square_up(95)
@@ -184,7 +184,7 @@ def drive_to_valve():
         g.drive_distance(80, 9)                             #blind drives to cover more distance quickly
         u.move_servo(c.servo_wrist, c.wrist_horizontal, 15)
         if c.is_prime:
-            d.timed_line_follow_left_smooth(1.7)
+            d.timed_line_follow_left_smooth(1.5)  #1.7
         else:
             d.timed_line_follow_left_smooth(2)      # line follows to get in perfect position
         msleep(100)
@@ -204,17 +204,18 @@ def drive_to_valve():
 
 def pick_up_valve():
     print("picking up valve")
+    g.turn_with_gyro(-50, 50, 2)
     u.move_servo(c.servo_claw, c.claw_valve, 20)
     u.move_servo(c.servo_arm, c.arm_drop_off, 20)
     g.drive_distance(70, 0.5)
     u.move_servo(c.servo_arm, c.armValve, 20)
-    u.move_servo(c.servo_wrist, c.wristFlipped, 20)     # grabs valve, raises arm, and flips it for a mechanical stop
+    u.move_servo(c.servo_wrist, c.wristFlipped, 20) # grabs valve, raises arm, and flips it for a mechanical stop
     g.drive_distance(-90, 1)
     g.turn_with_gyro(80, -80, 90)
     g.drive_distance(-80, 2)
     d.drive_to_black_and_square_up(-80)
     msleep(100)
-    g.drive_distance(95, 67)   # goes across the board
+    g.drive_distance(95, 63) #67  # goes across the board
     msleep(100)
 
 
@@ -226,7 +227,6 @@ def drop_first_valve():
     print('drive_to_black... tophat square up completed')
     g.drive_distance(-95, 26)                   # squares up against the wall
     print('manual square up completed')
-    u.waitForButton()
     g.drive_distance(85, 5)
     g.turn_with_gyro(70, -70, 90)
     d.drive_to_black_and_square_up(70)
@@ -261,11 +261,10 @@ def grab_second_valve():
     u.move_servo(c.servo_arm, c.arm_valve_grab, 20)
     g.drive_distance(90, 8)
     d.drive_to_black_and_square_up(-80)
-    u.waitForButton()
     g.drive_distance(90, 6.6)     # 7 = inches lego drived towards orange valve before turning
     # (worked but got too close to breaking claw on pipe)
-    g.turn_with_gyro(70, -70, 15)
-    g.drive_distance(85, 4.5)       # 4.3
+    g.turn_with_gyro(70, -70, 10)  #15
+    g.drive_distance(85, 3.8)       # 4.1
     g.turn_with_gyro(-60, 60, 5)
     u.move_servo(c.servo_claw, c.claw_valve, 20)
     u.move_servo(c.servo_arm, c.arm_drop_off, 20)
@@ -279,7 +278,6 @@ def grab_second_valve():
 def drop_second_valve():
     print("dropping off second valve")
     g.drive_distance(-95, 25)           # follows the same sequence as the first valve drop off
-    u.waitForButton()
     g.drive_distance(85, 5)
     g.turn_with_gyro(80, -80, 90)
     d.drive_to_black_and_square_up(80)
