@@ -173,16 +173,16 @@ def on_black_left():
     return analog(c.FRONT_TOPHAT_LEFT) > c.on_black
 
 
-def square_up_black(left_wheel_speed, right_wheel_speed): #Drives till black then saquares up
-    drive(left_wheel_speed, right_wheel_speed)
+def square_up_black(left_wheel_speed, right_wheel_speed): #Drives till black then squares up
+#    drive(left_wheel_speed, right_wheel_speed)
     while left_wheel_speed != 0 or right_wheel_speed != 0:
         drive(left_wheel_speed, right_wheel_speed)
         if on_black_left():
             left_wheel_speed = 0
-            drive(left_wheel_speed, right_wheel_speed)
+ #           drive(left_wheel_speed, right_wheel_speed)
         if on_black_right():
             right_wheel_speed = 0
-            drive(left_wheel_speed, right_wheel_speed)
+  #          drive(left_wheel_speed, right_wheel_speed)
     g._freeze_motors()
 
 

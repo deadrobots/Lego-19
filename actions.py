@@ -96,7 +96,7 @@ def drop_off_cluster():
             d.timed_line_follow_right_smooth(4.4) #line follows until there is almost no space between it and the pipe
         else:
             d.timed_line_follow_right_smooth(4.8)
-        g.turn_with_gyro(-80, 80, 90)           #turns and squares up on black
+        g.turn_with_gyro(-60, 60, 90)           #turns and squares up on black
     g.drive_condition(-70, d.on_black_right or d.on_black_left, True)
     d.square_up_black(-70, -70)
     msleep(50)
@@ -119,7 +119,7 @@ def drive_to_firetruck():
         g.pivot_on_left_wheel(90, 90)
     else:
         print("right burning routine")
-        g.drive_distance(90, 5.1) #5.5
+        g.drive_distance(90, 4.8) #5.1
         g.pivot_on_left_wheel(90, 90)
         d.drive_to_black_and_square_up(95)
         d.drive_to_white_and_square_up(95)
@@ -184,7 +184,7 @@ def drive_to_valve():
         g.drive_distance(80, 9)                             #blind drives to cover more distance quickly
         u.move_servo(c.servo_wrist, c.wrist_horizontal, 15)
         if c.is_prime:
-            d.timed_line_follow_left_smooth(1.5)  #1.7
+            d.timed_line_follow_left_smooth(1.3)  # 1.5
         else:
             d.timed_line_follow_left_smooth(2)      # line follows to get in perfect position
         msleep(100)
@@ -195,7 +195,7 @@ def drive_to_valve():
         g.turn_with_gyro(-80, 80, 34)           # wiggles closer to the line
         u.move_servo(c.servo_arm, c.arm_valve_grab, 20)
         if c.is_prime:
-            d.timed_line_follow_left_smooth(0.8)
+            d.timed_line_follow_left_smooth(0.7)
         else:
             d.timed_line_follow_left_smooth(1)            # line follows to get in perfect position
         g.turn_with_gyro(-80, 80, 5)            # turns in a little to grab the valve easier
@@ -213,9 +213,9 @@ def pick_up_valve():
     g.drive_distance(-90, 1)
     g.turn_with_gyro(80, -80, 90)
     g.drive_distance(-80, 2)
-    d.drive_to_black_and_square_up(-80)
+    d.drive_to_black_and_square_up(-30)
     msleep(100)
-    g.drive_distance(95, 63) #67  # goes across the board
+    g.drive_distance(95, 63)   # goes across the board
     msleep(100)
 
 
@@ -223,7 +223,7 @@ def drop_first_valve():
     # Places the first valve in its final place
     print("dropping off first valve")
     g.turn_with_gyro(-70, 70, 90)
-    d.drive_to_black_and_square_up(-70)         # squares up backward on the long black line across the board
+    d.drive_to_black_and_square_up(-50)   # squares up backward on the long black line across the board
     print('drive_to_black... tophat square up completed')
     g.drive_distance(-95, 26)                   # squares up against the wall
     print('manual square up completed')
@@ -272,7 +272,7 @@ def grab_second_valve():
     u.move_servo(c.servo_arm, c.armValve, 20)
     u.move_servo(c.servo_wrist, c.wristFlipped, 20)         # grabs the second valve and flips it
     g.turn_with_gyro(60, -60, 5)
-    d.drive_to_black_and_square_up(-80)         # squares up on the big middle line
+    d.drive_to_black_and_square_up(-50)         # squares up on the big middle line
 
 
 def drop_second_valve():

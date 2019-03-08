@@ -27,7 +27,7 @@ on_silver = 1800
 #servo ports
 servo_arm = 0
 servo_wrist = 1
-servo_claw = 2
+servo_claw = 3     #switched from 2 due to broken port
 
 if is_clone: # Yellow Lego
     #arm
@@ -66,9 +66,9 @@ if is_prime: # Red Lego
     wristFlipped = 2040
 
     # claw
-    claw_open = 150
+    claw_open = 80  #150
     claw_closed = 1000
     claw_valve = 1100
 
     # gyro
-    turn_conversion = 5200
+    turn_conversion = 5140
