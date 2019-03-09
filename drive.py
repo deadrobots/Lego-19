@@ -174,45 +174,36 @@ def on_black_left():
 
 
 def square_up_black(left_wheel_speed, right_wheel_speed): #Drives till black then squares up
-#    drive(left_wheel_speed, right_wheel_speed)
     while left_wheel_speed != 0 or right_wheel_speed != 0:
-        drive(left_wheel_speed, right_wheel_speed)
         if on_black_left():
             left_wheel_speed = 0
- #           drive(left_wheel_speed, right_wheel_speed)
         if on_black_right():
             right_wheel_speed = 0
-  #          drive(left_wheel_speed, right_wheel_speed)
-    g._freeze_motors()
-
-
-def square_up_white(left_wheel_speed, right_wheel_speed): #Drives till white then squares up
-    drive(left_wheel_speed, right_wheel_speed)
-    while left_wheel_speed != 0 or right_wheel_speed != 0:
         drive(left_wheel_speed, right_wheel_speed)
-        if not on_black_left():
-            left_wheel_speed = 0
-            drive(left_wheel_speed, right_wheel_speed)
-        if not on_black_right():
-            right_wheel_speed = 0
-            drive(left_wheel_speed, right_wheel_speed)
-    g._freeze_motors()
-
-
-def on_silver_right():
-    return analog(c.FRONT_TOPHAT_RIGHT) > c.on_silver
-
-
-def on_silver_left():
-    return analog(c.FRONT_TOPHAT_LEFT) > c.on_silver
+#
+# def square_up_white(left_wheel_speed, right_wheel_speed): #Drives till white then squares up
+#     drive(left_wheel_speed, right_wheel_speed)
+#     while left_wheel_speed != 0 or right_wheel_speed != 0:
+#         drive(left_wheel_speed, right_wheel_speed)
+#         if not on_black_left():
+#             left_wheel_speed = 0
+#             drive(left_wheel_speed, right_wheel_speed)
+#         if not on_black_right():
+#             right_wheel_speed = 0
+#             drive(left_wheel_speed, right_wheel_speed)
+#     g._freeze_motors()
 
 
 def drive_to_black_and_square_up(speed):
     #msleep(500)
-    g.drive_condition(speed, d.on_black_right or d.on_black_left, False)    # Drives while neither tophat sees black
-    print('SAW BLACK!!!')
+    g.drive_condition(speed, on_white_left_and_right, True)    # Drives while neither tophat sees black
+    print('SAW BLACK!!!', on_black_left(), on_black_right())
     d.square_up_black(speed/2, speed/2)
     msleep(250)
+
+
+def on_white_left_and_right():
+    return not on_black_left() and not on_black_right()
 
 
 def drive_to_white_and_square_up(speed):

@@ -22,7 +22,6 @@ FRONT_TOPHAT_LEFT = 1
 
 #sensor values
 on_black = 1800
-on_silver = 1800
 
 #servo ports
 servo_arm = 0
@@ -32,7 +31,7 @@ servo_claw = 3     #switched from 2 due to broken port
 if is_clone: # Yellow Lego
     #arm
     arm_up = 1420
-    arm_down = 160  # start position
+    arm_down = 180  # start position
     arm_valve_grab = 350
     arm_drop_off = 550
     armValve = 1100
@@ -54,15 +53,15 @@ if is_clone: # Yellow Lego
 if is_prime: # Red Lego
     # arm
     arm_up = 1420
-    arm_down = 160 # start position
-    arm_valve_grab = 330
+    arm_down = 230 # start position
+    arm_valve_grab = 370
     arm_drop_off = 550
     armValve = 1100
-    armValveDrop = 660
+    armValveDrop = 695
 
     # wrist
     wrist_horizontal = 60 # wrist flat
-    wrist_vertical = 1150 # wrist with upper and lower sides of claw
+    wrist_vertical = 1200 # wrist with upper and lower sides of claw
     wristFlipped = 2040
 
     # claw
@@ -71,4 +70,4 @@ if is_prime: # Red Lego
     claw_valve = 1100
 
     # gyro
-    turn_conversion = 5140
+    turn_conversion = 4950
