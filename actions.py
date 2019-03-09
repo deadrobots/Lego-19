@@ -41,7 +41,7 @@ def init():
     u.move_servo(c.servo_claw, c.claw_open)
     print("testing tophat")
     g.drive_condition(50, d.on_black_left, False)
-    g.drive_condition(50, d.on_silver_right, True)
+    g.drive_condition(50, d.on_black_right, True)
     d.drive_to_white_and_square_up(50)
     print("testing arm")
     u.move_servo(c.servo_arm, c.arm_up, 10)
@@ -181,21 +181,26 @@ def drive_to_valve():
         g.drive_distance(80, 6.5)       #drives forward a bit after dropping off firetruck
         g.turn_with_gyro(70, -70, 90)       #turns to face valve
         u.move_servo(c.servo_arm, c.arm_valve_grab, 15)
-        g.drive_distance(80, 9)                             #blind drives to cover more distance quickly
+        # g.drive_distance(80, 9)
+        u.waitForButton()                             #blind drives to cover more distance quickly
         u.move_servo(c.servo_wrist, c.wrist_horizontal, 15)
         if c.is_prime:
-            d.timed_line_follow_left_smooth(1.3)  # 1.5
+            d.timed_line_follow_left_smooth(2.7)  # 1.5
         else:
             d.timed_line_follow_left_smooth(2)      # line follows to get in perfect position
         msleep(100)
     else:                   #right burning
         print ("right burning")
         g.turn_with_gyro(80, -80, 34)
-        g.drive_distance(80, 7.2)
+        if c.is_prime:
+            g.drive_distance(80, 7.1)
+        else:
+            g.drive_distance(80, 7.1)
         g.turn_with_gyro(-80, 80, 34)           # wiggles closer to the line
+        g.drive_distance(-80, 2)
         u.move_servo(c.servo_arm, c.arm_valve_grab, 20)
         if c.is_prime:
-            d.timed_line_follow_left_smooth(0.7)
+            d.timed_line_follow_left_smooth(1.5)
         else:
             d.timed_line_follow_left_smooth(1)            # line follows to get in perfect position
         g.turn_with_gyro(-80, 80, 5)            # turns in a little to grab the valve easier
@@ -213,7 +218,13 @@ def pick_up_valve():
     g.drive_distance(-90, 1)
     g.turn_with_gyro(80, -80, 90)
     g.drive_distance(-80, 2)
-    d.drive_to_black_and_square_up(-30)
+    d.drive_to_black_and_square_up(-50)
+    msleep(100)
+    g.drive_distance(80, 1)
+    msleep(100)
+    d.drive_to_black_and_square_up(-50)
+    msleep(250)  # DO NOT REMOVE!
+    g.calibrate_gyro()
     msleep(100)
     g.drive_distance(95, 63)   # goes across the board
     msleep(100)
@@ -261,10 +272,10 @@ def grab_second_valve():
     u.move_servo(c.servo_arm, c.arm_valve_grab, 20)
     g.drive_distance(90, 8)
     d.drive_to_black_and_square_up(-80)
-    g.drive_distance(90, 6.6)     # 7 = inches lego drived towards orange valve before turning
+    g.drive_distance(90, 6)     # 7 = inches lego drived towards orange valve before turning
     # (worked but got too close to breaking claw on pipe)
     g.turn_with_gyro(70, -70, 10)  #15
-    g.drive_distance(85, 3.8)       # 4.1
+    g.drive_distance(85, 3.4)       # 4.1
     g.turn_with_gyro(-60, 60, 5)
     u.move_servo(c.servo_claw, c.claw_valve, 20)
     u.move_servo(c.servo_arm, c.arm_drop_off, 20)
