@@ -65,13 +65,14 @@ def grab_cluster():
     print ("Grabbing cluster")
     g.drive_timed(50, 0.55)
     u.move_servo(c.servo_claw, c.claw_closed, 12)
-    u.move_servo(c.servo_arm, c.arm_up, 15)
+    u.move_servo(c.servo_arm, c.arm_valve_grab, 15)
     g.drive_distance(80, 2)
 
 def drive_to_MC():
     #Drives towards both medical centers
     print ("Driving to medical center")
     g.pivot_on_left_wheel(90, 90)
+    u.move_servo(c.servo_arm, c.arm_up)
     g.drive_distance(95, 19)
     d.drive_to_black_and_square_up(90)  # squaring up on line next to water block
     g.drive_distance(-90, 3.5)
