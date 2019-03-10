@@ -138,7 +138,7 @@ def pick_up_firetruck():
     else:
         print("right burning")
         if c.is_prime :
-            g.turn_with_gyro(-80, 80, 5)
+            g.turn_with_gyro(-30, 30, 5)
         else:
             g.turn_with_gyro(-80, 80, 4)
     g.drive_distance(-80, 2.5)
@@ -220,28 +220,29 @@ def pick_up_valve():
     g.drive_distance(70, 0.5)
     u.move_servo(c.servo_arm, c.armValve, 20)
     u.move_servo(c.servo_wrist, c.wristFlipped, 20) # grabs valve, raises arm, and flips it for a mechanical stop
-    g.drive_distance(-90, 1)
-    g.turn_with_gyro(80, -80, 90)
-    g.drive_distance(-80, 2)
+    g.turn_with_gyro(-40,40,35)
+    g.drive_distance(-70,7)
     d.drive_to_black_and_square_up(-50)
-    # msleep(500)  # DO NOT REMOVE!
-    # g.calibrate_gyro()
-    msleep(100)
-    # g.turn_with_gyro(50, -50, 2)
-    if c.is_prime:
-            g.drive_distance(95, 61)  # goes across the board
-    else:
-            g.drive_distance(95, 67)
-    msleep(100)
-
+    g.drive_distance(70,1)
+    d.drive_to_black_and_square_up(-50)
+def driveToGasLine ():
+    u.move_servo(c.servo_arm, 1400)
+    msleep(500)
+    g.pivot_on_left_wheel(-30,96)
+    msleep(500)
+    g.drive_distance(70,50)
+    # g.drive_distance(60,3)
+    # g.pivot_on_right_wheel(60,90)
+    # g.drive_distance(60,22)
+    # g.turn_with_gyro(-70,70,90)
+    # d.drive_to_black_and_square_up(50)
 
 def drop_first_valve():
     # Places the first valve in its final place
     print("dropping off first valve")
     g.turn_with_gyro(-70, 70, 90)
-    d.drive_to_black_and_square_up(-70)   # squares up backward on the long black line across the board
     print('drive_to_black... tophat square up completed')
-    g.drive_distance(-95, 26)                   # squares up against the wall
+    g.drive_distance(-95, 23)                   # squares up against the wall
     print('manual square up completed')
     g.drive_distance(85, 5)
     g.turn_with_gyro(70, -70, 90)
@@ -282,7 +283,7 @@ def grab_second_valve():
         g.drive_distance(90, 5)     # 7 = inches lego drived towards orange valve before turning
         # (worked but got too close to breaking claw on pipe)
         g.turn_with_gyro(70, -70, 17)  #15
-        g.drive_distance(85, 4)       # 4.1
+        g.drive_distance(85, 5)       # 4.1
     else:
         g.drive_distance(90, 8)  # 7 = inches lego drived towards orange valve before turning
         # (worked but got too close to breaking claw on pipe)

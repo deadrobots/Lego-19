@@ -19,6 +19,7 @@ def main():
     a.drop_off_firetruck()
     a.drive_to_valve()
     a.pick_up_valve()
+    a.driveToGasLine()
     a.drop_first_valve()
     a.grab_second_valve()
     a.drop_second_valve()
