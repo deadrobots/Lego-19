@@ -22,7 +22,7 @@ def main():
     a.drop_first_valve()
     a.grab_second_valve()
     a.drop_second_valve()
-    u.DEBUG()
+    u.DEBUGwithWait()
 
 if __name__ == "__main__":
     sys.stdout = os.fdopen(sys.stdout.fileno(), "w", 0)
