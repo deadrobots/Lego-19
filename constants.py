@@ -38,8 +38,8 @@ if is_clone: # Yellow Lego
     armValveDrop = 660
 
     #wrist
-    wrist_horizontal = 0    # pipe held vertically
-    wrist_vertical = 1030  # pipe held horizontally
+    wrist_horizontal = 80    # pipe held vertically
+    wrist_vertical = 1250  # pipe held horizontally
     wristFlipped = 2040
 
     #claw
@@ -52,9 +52,11 @@ if is_clone: # Yellow Lego
 
 if is_prime: # Red Lego
     # arm
+    # Arm values are based on the tightness of the two screws in the arm
+    # Make sure these are tight before you start to change arm values
     arm_up = 1420
     arm_down = 230 # start position
-    arm_valve_grab = 370
+    arm_valve_grab = 355 #370
     arm_drop_off = 550
     armValve = 1100
     armValveDrop = 695
