@@ -38,9 +38,13 @@ def init():
     print("testing claw")
     u.move_servo(c.servo_claw, c.claw_closed)
     u.move_servo(c.servo_claw, c.claw_open)
-    print("testing tophat")
+    print("testing LEFT tophat")
     g.drive_condition(50, d.on_black_left, False)
-    g.drive_condition(50, d.on_black_right, True)
+    g.drive_distance(-50, 1)
+    print("testing RIGHT tophat")
+    g.drive_condition(50, d.on_black_right, False)
+    g.drive_distance(-50, 1)
+    g.drive_distance(50, 3)
     d.drive_to_white_and_square_up(50)
     print("Testing lever switch. Press it!")
     done = seconds() + 3.0
@@ -91,9 +95,12 @@ def drop_off_cluster():
     d.drive_to_white_and_square_up(90)  # square up on white (past black and silver line)
     if left_burning == 1:
         print("left burning")
-        g.drive_distance(85, 1.95) #2.3
+        if c.is_prime:
+            g.drive_distance(85, 1.95) #2.3
+        else:
+            g.drive_distance(85, 2.15)
         g.turn_with_gyro(-70, 70, 90)
-        g.drive_distance(80, 4)
+        g.drive_distance(80, 4.5)
     else:
         print("right burning")
         g.turn_with_gyro(0, 90, 60)         #wiggles to black line
@@ -144,7 +151,7 @@ def pick_up_firetruck():
     else:
         print("right burning")
         if c.is_prime :
-            g.turn_with_gyro(-30, 30, 5)
+            g.turn_with_gyro(-30, 30, 8)
         else:
             g.turn_with_gyro(-80, 80, 4)
     g.drive_distance(-80, 2.5)
@@ -257,9 +264,9 @@ def driveToGasLine ():
         g.pivot_on_left_wheel(-85, 96)
     msleep(200)
     if c.is_prime:
-        g.drive_distance(95,54)
+        g.drive_distance(95, 54)
     else:
-        g.drive_distance(95, 56)
+        g.drive_distance(95, 58)
     # g.drive_distance(60,3)
     # g.pivot_on_right_wheel(60,90)
     # g.drive_distance(60,22)
@@ -269,19 +276,25 @@ def driveToGasLine ():
 def drop_first_valve():
     # Places the first valve in its final place
     print("dropping off first valve")
-    g.turn_with_gyro(-70, 70, 90)
+    if c.is_prime:
+        g.turn_with_gyro(-70, 70, 92)#90
+    else:
+        g.turn_with_gyro(-70, 70, 90)
     g.drive_distance(-95, 23)                   # squares up against the wall
     print('manual square up completed')
     g.drive_distance(85, 5)
+    msleep(100)
     g.turn_with_gyro(70, -70, 90)
+    msleep(100)
     d.drive_to_black_and_square_up(80)
+    g.drive_distance(70, .5)
     d.drive_to_white_and_square_up(80)          # squares up on the little line perpendicular to the wall
     msleep(100)
     g.drive_distance(-60, 3.1)
     if c.is_prime:
         g.turn_with_gyro(50, -50, 95)       # turns to face valve
         msleep(100)
-        g.drive_distance(-50, 4.3) #4
+        g.drive_distance(-50, 4.2) #4.3
     else:
         g.turn_with_gyro(50, -50, 90)
         msleep(100)
@@ -304,16 +317,18 @@ def grab_second_valve():
     msleep(100)
     g.turn_with_gyro(75, -75, 190)      # turns all the way around
     u.move_servo(c.servo_wrist, c.wrist_horizontal, 30)     # turns wrist horizontally
-    u.move_servo(c.servo_arm, c.arm_valve_grab, 20)
+    u.move_servo(c.servo_arm, c.arm_up, 20)
     g.drive_distance(90, 8)
     d.drive_to_black_and_square_up(-80)
     if c.is_prime:
         g.drive_distance(90, 5)     # 7 = inches lego drove towards orange valve before turning
         g.turn_with_gyro(70, -70, 17)  #15
+        u.move_servo(c.servo_arm, c.arm_valve_grab, 20)
         g.drive_distance(85, 5.3)       #5
     else:
         g.drive_distance(90, 5) # 7 = inches lego drove towards orange valve before turning
         g.turn_with_gyro(70, -70, 17) # 15
+        u.move_servo(c.servo_arm, c.arm_valve_grab, 20)
         g.drive_distance(85, 5.8) # 4.1
     g.turn_with_gyro(-60, 60, 5)
     u.move_servo(c.servo_claw, c.claw_valve, 20)
@@ -338,7 +353,7 @@ def drop_second_valve():
     g.turn_with_gyro(50, -50, 90)
     msleep(100)
     if c.is_prime:
-        g.drive_distance(-50, 4)
+        g.drive_distance(-50, 3.9)#4
     else:
         g.drive_distance(-50, 4.2)  #3.8
     msleep(100)

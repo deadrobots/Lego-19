@@ -36,7 +36,7 @@ def calibrate_gyro():
 
 #The drive functions use the change in gyro_z to adjust wheel speeds and drive straight
 def drive_timed(speed, time):
-    print("Driving for time")
+    #print("Driving for time")
     #calibrate_gyro()
     start_time = seconds()
     theta = 0
@@ -54,7 +54,7 @@ def drive_timed(speed, time):
                                                   # All of these turn/pivots measure the change gyro_z to make the turn or pivot more excact
 def turn_with_gyro(left_wheel_speed, right_wheel_speed, target_theta_deg):
     #calibrate_gyro()
-    print("turning")
+    #print("turning")
     target_theta = round(target_theta_deg * c.turn_conversion)
     theta = 0
     while theta < target_theta:
@@ -62,13 +62,13 @@ def turn_with_gyro(left_wheel_speed, right_wheel_speed, target_theta_deg):
         motor(c.LEFT_MOTOR, left_wheel_speed)
         msleep(10)
         theta = theta + abs(gyro_z() - bias) * 10
-    print(theta)
+    #print(theta)
     _freeze_motors()
 
 
 def pivot_on_left_wheel(right_wheel_speed, target_theta_deg):
     #calibrate_gyro()
-    print("pivoting on left")
+    #print("pivoting on left")
     target_theta = round(target_theta_deg * c.turn_conversion)
     theta = 0
     while theta < target_theta:
@@ -83,7 +83,7 @@ def pivot_on_left_wheel(right_wheel_speed, target_theta_deg):
 
 def pivot_on_right_wheel(left_wheel_speed, target_theta_deg):
     #calibrate_gyro()
-    print("pivoting on right")
+    #print("pivoting on right")
     target_theta = round(target_theta_deg * c.turn_conversion)
     theta = 0
     while theta < target_theta:
@@ -99,7 +99,7 @@ def pivot_on_right_wheel(left_wheel_speed, target_theta_deg):
 def drive_distance(speed, distance):
     #calibrate_gyro()
     _clear_ticks()
-    print("Driving for distance")
+    #print("Driving for distance")
     theta = 0
     while abs((get_motor_position_counter(c.RIGHT_MOTOR) + get_motor_position_counter(c.LEFT_MOTOR))/2) < distance * INCHES_TO_TICKS:
         if speed > 0:
@@ -115,7 +115,7 @@ def drive_distance(speed, distance):
 
 def drive_condition(speed, test_function, state = True): #Needs some work
     #calibrate_gyro()
-    print("Driving while condition is inputted state")
+    #print("Driving while condition is inputted state")
     theta = 0
     while test_function() is state:
         if speed > 0:
@@ -157,7 +157,7 @@ def _drive1(lspeed, rspeed, theta = 0):
 
 def drive_timed1(lspeed, rspeed, time):
     #calibrate_gyro()
-    print("Driving for time")
+    #print("Driving for time")
     start_time = seconds()
     theta = 0
     while seconds() - start_time < time:
