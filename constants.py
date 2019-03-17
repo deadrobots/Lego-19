@@ -55,7 +55,7 @@ if is_prime: # Red Lego
     # Arm values are based on the tightness of the two screws in the arm
     # Make sure these are tight before you start to change arm values
     arm_up = 1420
-    arm_down = 230 # start position
+    arm_down = 210 #230 old, missed pom often start position
     arm_valve_grab = 355 #370
     arm_drop_off = 550
     armValve = 1100
@@ -72,4 +72,4 @@ if is_prime: # Red Lego
     claw_valve = 1100
 
     # gyro
-    turn_conversion = 5050
+    turn_conversion = 5150 #5050

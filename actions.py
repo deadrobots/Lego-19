@@ -60,6 +60,7 @@ def init():
     u.waitForButton()
     g.calibrate_gyro()
 
+
 def grab_cluster():
     global left_burning
     print("Waiting for something to press button")
@@ -227,7 +228,7 @@ def drive_to_valve():
         if c.is_prime:
             d.timed_line_follow_left_smooth(1.5)
         else:
-            d.timed_line_follow_left_smooth(1.85)  #1.7         # line follows to get in perfect position
+            d.timed_line_follow_left_smooth(1.85)  # 1.7         #line follows to get in perfect position
         g.turn_with_gyro(-80, 80, 5)            # turns in a little to grab the valve easier
         g.drive_distance(80, .4)
 
@@ -260,18 +261,13 @@ def driveToGasLine ():
     msleep(200)
     if c.is_prime:
         g.pivot_on_left_wheel(-85, 97)
+        msleep(2200)            # pause for choreography
+        g.drive_distance(95, 55.5)
     else:
         g.pivot_on_left_wheel(-85, 96)
-    msleep(200)
-    if c.is_prime:
-        g.drive_distance(95, 54)
-    else:
+        msleep(200)         # clone will need to sleep too
         g.drive_distance(95, 58)
-    # g.drive_distance(60,3)
-    # g.pivot_on_right_wheel(60,90)
-    # g.drive_distance(60,22)
-    # g.turn_with_gyro(-70,70,90)
-    # d.drive_to_black_and_square_up(50)
+
 
 def drop_first_valve():
     # Places the first valve in its final place
@@ -294,7 +290,7 @@ def drop_first_valve():
     if c.is_prime:
         g.turn_with_gyro(50, -50, 95)       # turns to face valve
         msleep(100)
-        g.drive_distance(-50, 4.2) #4.3
+        g.drive_distance(-50, 4.3)
     else:
         g.turn_with_gyro(50, -50, 90)
         msleep(100)
@@ -309,6 +305,10 @@ def drop_first_valve():
     u.move_servo(c.servo_claw, c.claw_open, 20)
     u.move_servo(c.servo_arm, c.arm_drop_off - 100, 20)         # slides the valve onto the pipe
     print("Delivered with a spin!")
+    if c.is_prime:
+        msleep(4000)    # pauses to keep from crashing into create
+    else:
+        msleep(4000)    # untested value
     g.drive_distance(-90, 7)
 
 
