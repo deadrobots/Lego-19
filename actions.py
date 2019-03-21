@@ -138,7 +138,7 @@ def drive_to_firetruck():
         g.pivot_on_left_wheel(90, 90)
         d.drive_to_black_and_square_up(95)
         d.drive_to_white_and_square_up(95)
-        g.drive_distance(95, 4)
+        g.drive_distance(95, 9)#
         d.drive_to_black_and_square_up(95)  # True #drives until the black line at the end of the medical center
 
 
@@ -288,7 +288,7 @@ def drop_first_valve():
     msleep(100)
     g.drive_distance(-60, 3.1)
     if c.is_prime:
-        g.turn_with_gyro(50, -50, 95)       # turns to face valve
+        g.turn_with_gyro(50, -50, 92)       # turns to face valve
         msleep(100)
         g.drive_distance(-50, 4.3)
     else:
@@ -330,10 +330,11 @@ def grab_second_valve():
         g.turn_with_gyro(70, -70, 17) # 15
         u.move_servo(c.servo_arm, c.arm_valve_grab, 20)
         g.drive_distance(85, 5.8) # 4.1
-    g.turn_with_gyro(-60, 60, 5)
+    g.turn_with_gyro(-60, 60, 8)
+    g.drive_distance(60, .5)
     u.move_servo(c.servo_claw, c.claw_valve, 20)
     u.move_servo(c.servo_arm, c.arm_drop_off, 20)
-    g.drive_distance(70, 0.5)
+    g.drive_distance(70, .7)
     u.move_servo(c.servo_arm, c.armValve, 20)
     u.move_servo(c.servo_wrist, c.wristFlipped, 20)         # grabs the second valve and flips it
     g.turn_with_gyro(60, -60, 5)
@@ -353,7 +354,7 @@ def drop_second_valve():
     g.turn_with_gyro(50, -50, 90)
     msleep(100)
     if c.is_prime:
-        g.drive_distance(-50, 3.9)#4
+        g.drive_distance(-50, 4.4)#4
     else:
         g.drive_distance(-50, 4.2)  #3.8
     msleep(100)
