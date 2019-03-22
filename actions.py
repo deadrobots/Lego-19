@@ -306,9 +306,9 @@ def drop_first_valve():
     u.move_servo(c.servo_arm, c.arm_drop_off - 100, 20)         # slides the valve onto the pipe
     print("Delivered with a spin!")
     if c.is_prime:
-        msleep(4000)    # pauses to keep from crashing into create
+        msleep(6000)    # pauses to keep from crashing into create
     else:
-        msleep(4000)    # untested value
+        msleep(6000)    # untested value
     g.drive_distance(-90, 7)
 
 
