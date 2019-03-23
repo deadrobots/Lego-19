@@ -134,10 +134,14 @@ def drive_to_firetruck():
         g.pivot_on_left_wheel(90, 90)
     else:
         print("right burning routine")
-        g.drive_distance(90, 4.4) #4.8
-        g.pivot_on_left_wheel(90, 90)
-        d.drive_to_black_and_square_up(95)
-        d.drive_to_white_and_square_up(95)
+        g.drive_distance(90, 4.9) #4.4
+        if c.is_prime:
+            g.pivot_on_left_wheel(90, 88)
+            d.drive_to_white_and_square_up(95)
+        else:
+            g.pivot_on_left_wheel(90, 90)
+            d.drive_to_black_and_square_up(95)
+            d.drive_to_white_and_square_up(95)
         g.drive_distance(95, 9)#
         d.drive_to_black_and_square_up(95)  # True #drives until the black line at the end of the medical center
 
@@ -258,7 +262,7 @@ def driveToGasLine ():
     if c.is_prime:
         g.pivot_on_left_wheel(-85, 97)
         msleep(2200)  # pause for choreography
-        g.drive_distance(95, 55.5)
+        g.drive_distance(95, 58)
     else:
         g.pivot_on_left_wheel(-85, 96)
         msleep(2200)
@@ -286,7 +290,7 @@ def drop_first_valve():
     if c.is_prime:
         g.turn_with_gyro(50, -50, 92)  # turns to face valve
         msleep(100)
-        g.drive_distance(-50, 4.3)
+        g.drive_distance(-50, 4.6)
     else:
         g.turn_with_gyro(50, -50, 90)
         msleep(100)
@@ -320,7 +324,7 @@ def grab_second_valve():
         g.drive_distance(90, 5)  # lego drove towards orange valve before turning
         g.turn_with_gyro(70, -70, 17)
         u.move_servo(c.servo_arm, c.arm_valve_grab, 20)
-        g.drive_distance(85, 5.3)
+        g.drive_distance(85, 6.1)#5.3
     else:
         g.drive_distance(90, 5)  # lego drove towards orange valve before turning
         g.turn_with_gyro(70, -70, 17)
@@ -345,6 +349,7 @@ def drop_second_valve():
     g.turn_with_gyro(80, -80, 90)
     d.drive_to_black_and_square_up(80)
     d.drive_to_white_and_square_up(80)
+    u.move_servo(c.servo_arm, c.arm_up, 15)
     g.drive_distance(-50, 3.1)
     msleep(100)
     g.turn_with_gyro(50, -50, 90)
