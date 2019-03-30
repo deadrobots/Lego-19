@@ -58,6 +58,7 @@ def init():
     u.move_servo(c.servo_arm, c.arm_down, 5)
     print("place in start posistion")
     u.wait_4_light()
+    #u.waitForButton()
     shut_down_in(119.2)
     g.calibrate_gyro()
 
@@ -156,10 +157,13 @@ def pick_up_firetruck():
     d.drive_to_white_and_square_up(90)
     if left_burning:
         print("left burning")
-        g.turn_with_gyro(-30, 30, 4)
+        if c.is_prime:
+            g.turn_with_gyro(-30, 30, 2)
+        else:
+            g.turn_with_gyro(-30, 30, 4)
     else:
         print("right burning")
-        if c.is_prime :
+        if c.is_prime:
             g.turn_with_gyro(-30, 30, 8)
         else:
             g.turn_with_gyro(-80, 80, 4)
@@ -211,7 +215,7 @@ def drive_to_valve():
             u.move_servo(c.servo_wrist, c.wrist_horizontal, 15)
             d.timed_line_follow_left_smooth(2)
             g.drive_distance(80, 3.2)
-            d.timed_line_follow_left_smooth(2)
+            d.timed_line_follow_left_smooth(1.8)#2
         else:
             u.move_servo(c.servo_wrist, c.wrist_horizontal, 15)
             d.timed_line_follow_left_smooth(2.3)
@@ -267,7 +271,7 @@ def driveToGasLine():
     if c.is_prime:
         g.pivot_on_left_wheel(-85, 97)
         msleep(2200)  # pause for choreography
-        g.drive_distance(95, 57)
+        g.drive_distance(95, 55.5)
     else:
         g.pivot_on_left_wheel(-85, 96)
         msleep(500)
@@ -334,9 +338,9 @@ def grab_second_valve():
         g.drive_distance(90, 5)  # lego drove towards orange valve before turning
         g.turn_with_gyro(70, -70, 17)
         u.move_servo(c.servo_arm, c.arm_valve_grab, 20)
-        g.drive_distance(85, 5.7)  # 5.3 6.1
+        g.drive_distance(85, 5.2)  # 5.3 6.1
         g.turn_with_gyro(-60, 60, 8)
-        g.drive_distance(60, .5)
+        g.drive_distance(60, .4)
     else:
         g.drive_distance(90, 5)  # lego drove towards orange valve before turning
         g.turn_with_gyro(70, -70, 17)  # 17 gave problem twice
