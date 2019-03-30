@@ -57,7 +57,7 @@ def init():
     u.move_servo(c.servo_arm, c.arm_up, 10)
     u.move_servo(c.servo_arm, c.arm_down, 5)
     print("place in start posistion")
-    u.waitForButton()
+    u.wait_4_light()
     shut_down_in(119.2)
     g.calibrate_gyro()
 
@@ -83,7 +83,10 @@ def grab_cluster():
 def drive_to_MC():
     #Drives towards both medical centers
     print ("Driving to medical center")
-    g.pivot_on_left_wheel(90, 90)
+    if c.is_prime:
+        g.pivot_on_left_wheel(90, 94)
+    else:
+        g.pivot_on_left_wheel(90, 90)
     u.move_servo(c.servo_arm, c.arm_up)
     g.drive_distance(95, 19)
     d.drive_to_black_and_square_up(50)  # squaring up on line next to water block
@@ -264,7 +267,7 @@ def driveToGasLine():
     if c.is_prime:
         g.pivot_on_left_wheel(-85, 97)
         msleep(2200)  # pause for choreography
-        g.drive_distance(95, 58)
+        g.drive_distance(95, 57)
     else:
         g.pivot_on_left_wheel(-85, 96)
         msleep(500)

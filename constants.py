@@ -19,6 +19,7 @@ is_prime = not is_clone
 #Analog ports
 FRONT_TOPHAT_RIGHT = 0  # analog
 FRONT_TOPHAT_LEFT = 1
+START_LIGHT = 5
 
 #sensor values
 on_black = 1800
