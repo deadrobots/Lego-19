@@ -311,8 +311,12 @@ def drop_first_valve():
     u.move_servo(c.servo_arm, c.armValveDrop, 20)
     u.move_servo(c.servo_wrist, c.wrist_vertical, 20)
     g.turn_with_gyro(-30, 30, 20)
-    g.drive_distance(50, .25)
-    g.turn_with_gyro(-30, 30, 10)
+    if c.is_prime:
+        g.drive_distance(50, .4)
+        g.turn_with_gyro(-30, 30, 15)
+    else:
+        g.drive_distance(50, .25)
+        g.turn_with_gyro(-30, 30, 10)
     u.move_servo(c.servo_claw, c.claw_open, 20)
     u.move_servo(c.servo_arm, c.arm_drop_off - 100, 20)  # slides the valve onto the pipe
     print("Delivered with a spin!")
@@ -338,7 +342,7 @@ def grab_second_valve():
         g.drive_distance(90, 5)  # lego drove towards orange valve before turning
         g.turn_with_gyro(70, -70, 17)
         u.move_servo(c.servo_arm, c.arm_valve_grab, 20)
-        g.drive_distance(85, 5.2)  # 5.3 6.1
+        g.drive_distance(85, 5.0)  # 5.2
         g.turn_with_gyro(-60, 60, 8)
         g.drive_distance(60, .4)
     else:

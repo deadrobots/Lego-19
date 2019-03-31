@@ -5,7 +5,7 @@ import constants as c
 import utils as u
 
 if c.is_prime:
-    INCHES_TO_TICKS = 207
+    INCHES_TO_TICKS = 195
 else:
     INCHES_TO_TICKS = 218
 

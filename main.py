@@ -9,6 +9,8 @@ import gyroDrive as g
 
 
 def main():
+    g.drive_distance(100, 50)
+    u.DEBUG()
     a.init()
     c.start_time = seconds()
     a.grab_cluster()
@@ -24,6 +26,7 @@ def main():
     a.grab_second_valve()
     a.drop_second_valve()
     u.DEBUGwithWait()
+
 
 if __name__ == "__main__":
     sys.stdout = os.fdopen(sys.stdout.fileno(), "w", 0)
