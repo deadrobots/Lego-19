@@ -9,8 +9,6 @@ import gyroDrive as g
 
 
 def main():
-    g.drive_distance(100, 50)
-    u.DEBUG()
     a.init()
     c.start_time = seconds()
     a.grab_cluster()
