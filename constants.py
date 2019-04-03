@@ -73,4 +73,4 @@ if is_prime: # Red Lego
     claw_valve = 1100
 
     # gyro
-    turn_conversion = 5240 #5150
+    turn_conversion = 5180 #5150

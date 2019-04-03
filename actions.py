@@ -270,7 +270,7 @@ def driveToGasLine():
     msleep(200)
     if c.is_prime:
         g.pivot_on_left_wheel(-85, 97)
-        msleep(2200)  # pause for choreography
+        msleep(1200)  # pause for choreography
         g.drive_distance(95, 55.5)
     else:
         g.pivot_on_left_wheel(-85, 96)
