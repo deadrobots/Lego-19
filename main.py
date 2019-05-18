@@ -21,9 +21,14 @@ def main():
     a.pick_up_valve()
     a.driveToGasLine()
     a.drop_first_valve()
+    a.drive_to_bin()
+    u.waitForButton()
+    a.flip_bin_over()
+    u.DEBUG()
     a.grab_second_valve()
     a.drop_second_valve()
     u.DEBUGwithWait()
+    #a.flip_bin_over()
 
 
 if __name__ == "__main__":

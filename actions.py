@@ -58,8 +58,8 @@ def init():
     u.move_servo(c.servo_arm, c.arm_down, 5)
     print("place in start posistion")
     ao()
-    u.wait_4_light()
-    #u.waitForButton()
+    #u.wait_4_light()
+    u.waitForButton()
     shut_down_in(119.2)
     g.calibrate_gyro()
 
@@ -388,3 +388,33 @@ def drop_second_valve():
     g.turn_with_gyro(-30, 30, 10)  # drops off on the same side as the first valve, holds valve in scoring position
     # end of lego routine
     print("holding the second valve on the pipe")
+
+
+def drive_to_bin():
+    print("grabbing second valve")
+    msleep(100)
+    if c.is_prime:
+        g.turn_with_gyro(75, -75, 190)
+    else:
+        g.turn_with_gyro(75, -75, 195)  # 190
+    u.move_servo(c.servo_wrist, c.wrist_horizontal, 30)  # turns wrist horizontally
+    u.move_servo(c.servo_arm, c.arm_up, 20)
+    g.drive_distance(90, 8)
+    d.drive_to_black_and_square_up(-80)
+    u.waitForButton()
+    g.turn_with_gyro(50, -50, 100)
+    msleep(100)
+    g.drive_distance(-50, 4.4)  # 4.6
+    msleep(100)
+
+
+def flip_bin_over():
+    u.move_servo(c.servo_claw, c.claw_open)
+    u.move_servo(c.servo_arm, c.arm_down)
+    u.move_servo(c.servo_claw,c.claw_closed)
+    u.move_servo(c.servo_arm, c.arm_up)
+    g.drive_distance(-70, 14)
+    u.move_servo(c.servo_arm, c.arm_down)
+    msleep(500)
+    g.turn_with_gyro(75,-75, 10)
+    g.drive_distance(70, 2)
