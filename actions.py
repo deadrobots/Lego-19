@@ -57,6 +57,7 @@ def init():
     u.move_servo(c.servo_arm, c.arm_up, 10)
     u.move_servo(c.servo_arm, c.arm_down, 5)
     print("place in start posistion")
+    ao()
     u.wait_4_light()
     #u.waitForButton()
     shut_down_in(119.2)
@@ -166,7 +167,8 @@ def pick_up_firetruck():
         if c.is_prime:
             g.turn_with_gyro(-30, 30, 8)
         else:
-            g.turn_with_gyro(-80, 80, 4)
+            g.turn_with_gyro(-80, 80, 5.)
+    msleep(100)
     g.drive_distance(-80, 2.5)
     u.move_servo(c.servo_arm, c.arm_down, 15)
     g.drive_distance(80, 2.5)

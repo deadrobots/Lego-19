@@ -3,18 +3,21 @@ import wallaby as w
 # Time
 start_time = -1
 
-# motor values
-LEFT_MOTOR = 0
-RIGHT_MOTOR = 3
-
-
 # Digital ports
 CLONE_SWITCH = 9
 RIGHT_BUTTON = 13
 BUTTON = 0
 
+#Prime/Clone
 is_clone = w.digital(CLONE_SWITCH)
 is_prime = not is_clone
+
+# motor values
+LEFT_MOTOR = 0
+if is_prime:
+    RIGHT_MOTOR = 3
+else:
+    RIGHT_MOTOR = 2
 
 #Analog ports
 FRONT_TOPHAT_RIGHT = 0  # analog
@@ -49,7 +52,7 @@ if is_clone: # Yellow Lego
     claw_valve = 850
 
     #gyro
-    turn_conversion = 5200
+    turn_conversion = 5250
 
 if is_prime: # Red Lego
     # arm
