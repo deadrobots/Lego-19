@@ -60,7 +60,7 @@ def init():
     ao()
     #u.wait_4_light()
     u.waitForButton()
-    shut_down_in(119.2)
+    # shut_down_in(119.2)
     g.calibrate_gyro()
 
 
@@ -401,20 +401,25 @@ def drive_to_bin():
     u.move_servo(c.servo_arm, c.arm_up, 20)
     g.drive_distance(90, 8)
     d.drive_to_black_and_square_up(-80)
-    u.waitForButton()
-    g.turn_with_gyro(50, -50, 100)
-    msleep(100)
-    g.drive_distance(-50, 4.4)  # 4.6
-    msleep(100)
+    g.drive_distance(70,9)
+    g.turn_with_gyro(-50,50,90)
+    g.drive_distance(-70, 18)
+    g.drive_distance(70,5.5)
+    g.pivot_on_right_wheel(70,90)
+    g.drive_condition(70,d.on_black_left, False)
+    d.line_follow_right(2)
 
 
 def flip_bin_over():
-    u.move_servo(c.servo_claw, c.claw_open)
-    u.move_servo(c.servo_arm, c.arm_down)
-    u.move_servo(c.servo_claw,c.claw_closed)
-    u.move_servo(c.servo_arm, c.arm_up)
-    g.drive_distance(-70, 14)
-    u.move_servo(c.servo_arm, c.arm_down)
-    msleep(500)
-    g.turn_with_gyro(75,-75, 10)
-    g.drive_distance(70, 2)
+    print("preparing to grab bin")
+    u.move_servo(c.servo_arm, c.armBinPickup, 20)
+    u.move_servo(c.servo_wrist, c.wrist_vertical, 20)
+    u.move_servo(c.servo_claw, c.claw_open, 20)
+    u.move_servo(c.servo_arm, c.armBinGrab, 20)
+    u.waitForButton()  #for now, place bin after arm sets up for grab
+    print("picking up bin")
+    u.move_servo(c.servo_claw, c.claw_bin_closed, 20)
+    msleep(200)
+    u.move_servo(c.servo_arm, c.armBinPickup, 10)
+    g.drive_distance(-40, 14)
+

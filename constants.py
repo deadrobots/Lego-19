@@ -64,6 +64,9 @@ if is_prime: # Red Lego
     arm_drop_off = 550
     armValve = 1100
     armValveDrop = 695
+    armBinGrab = 267
+    armBinPickup = 945
+
 
     # wrist
     wrist_horizontal = 60 # wrist flat
@@ -71,8 +74,9 @@ if is_prime: # Red Lego
     wristFlipped = 2040
 
     # claw
-    claw_open = 80  #150
+    claw_open = 0  #150
     claw_closed = 1000
+    claw_bin_closed = 1024
     claw_valve = 1100
 
     # gyro
