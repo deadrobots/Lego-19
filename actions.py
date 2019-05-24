@@ -241,7 +241,10 @@ def drive_to_valve():
         else:
             d.timed_line_follow_left_smooth(1.85)  # line follows to get in perfect position
         g.turn_with_gyro(-80, 80, 5)  # turns in a little to grab the valve easier
-        g.drive_distance(80, .4)
+        if c.is_prime:
+            g.drive_distance(80, .4)
+        else:
+            g.drive_distance(70, .1)
 
 
 def pick_up_valve():
@@ -320,7 +323,7 @@ def drop_first_valve():
         g.drive_distance(50, .25)
         g.turn_with_gyro(-30, 30, 10)
     u.move_servo(c.servo_claw, c.claw_open, 20)
-    u.move_servo(c.servo_arm, c.arm_drop_off - 100, 20)  # slides the valve onto the pipe
+    u.move_servo(c.servo_arm, c.arm_drop_off , 20)  # slides the valve onto the pipe
     print("Delivered with a spin!")
     if c.is_prime:
         msleep(6000)  # pauses to keep from crashing into create
@@ -403,22 +406,22 @@ def drive_to_bin():
     d.drive_to_black_and_square_up(-80)
     g.drive_distance(70,9)
     g.turn_with_gyro(-50,50,90)
-    g.drive_distance(-70, 18)
+    g.drive_distance(-70, 19)
     g.drive_distance(70,5.5)
-    g.pivot_on_right_wheel(70,90)
+    g.pivot_on_right_wheel(70,94)
     g.drive_condition(70,d.on_black_left, False)
-    d.line_follow_right(2)
-
+    u.move_servo(c.servo_arm, c.armBinGrab, 20)
+    u.move_servo(c.servo_wrist, c.wrist_vertical, 20)
+    u.move_servo(c.servo_claw, c.claw_open, 20)
+    g.drive_distance(55,5)
 
 def flip_bin_over():
     print("preparing to grab bin")
-    u.move_servo(c.servo_arm, c.armBinPickup, 20)
-    u.move_servo(c.servo_wrist, c.wrist_vertical, 20)
-    u.move_servo(c.servo_claw, c.claw_open, 20)
-    u.move_servo(c.servo_arm, c.armBinGrab, 20)
     u.waitForButton()  #for now, place bin after arm sets up for grab
     print("picking up bin")
-    u.move_servo(c.servo_claw, c.claw_bin_closed, 20)
+    u.move_servo(c.servo_arm, c.armBinPickup, 20)
+    msleep(500)
+    u.move_servo(c.servo_claw, c.claw_bin, 20)
     msleep(200)
     u.move_servo(c.servo_arm, c.armBinPickup, 10)
     g.drive_distance(-40, 14)
