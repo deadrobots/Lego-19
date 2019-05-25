@@ -136,6 +136,13 @@ def timed_line_follow_left_smooth(time):
             driveTimed(40, 20, 20)
         msleep(10)
 
+def timed_line_follow_left_right_side_line(time):
+    sec = seconds() + time
+    while seconds() < sec:
+        if on_black_left():
+            driveTimed(40,20,20)
+        else:
+            driveTimed(20,40,20)
 
 def timedLineFollowRightSmooth(time):
     sec = seconds() + time

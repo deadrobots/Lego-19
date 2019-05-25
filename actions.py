@@ -205,6 +205,59 @@ def drop_off_firetruck():
         g.turn_with_gyro(80, -80, 10)  # rotates back
 
 
+def drive_to_bin ():
+    print("driving to bin")
+    global left_burning
+    if left_burning:
+        print("left burning")
+        g.drive_distance(80, 6.5)
+        g.turn_with_gyro(70, -70, 120)  # turns to face valve
+        g.drive_distance(50, 3)
+        g.turn_with_gyro(-70, 70, 20)
+        u.move_servo(c.servo_wrist, c.wrist_vertical, 10)
+        if c.is_prime:
+            d.timed_line_follow_left_smooth(2)
+            g.drive_distance(80, 3.2)
+            d.timed_line_follow_left_right_side_line(2.6)#2
+            u.move_servo(c.servo_arm, c.armBinGrab, 15)
+        else:
+            d.timed_line_follow_left_right_side_line(3.3)
+            g.drive_distance(80, 3.2)
+            u.move_servo(c.servo_arm, c.arm_valve_grab, 10)
+            d.timed_line_follow_left_right_side_line(2.1)
+            u.move_servo(c.servo_arm, c.armBinGrab, 15)
+        msleep(100)
+    else:  # right burning
+        print ("right burning")
+        g.turn_with_gyro(80, -80, 34)
+        if c.is_prime:
+            g.drive_distance(80, 7.1)
+        else:
+            g.drive_distance(80, 7.1)
+        g.drive_distance(80, 2)
+        g.turn_with_gyro(0, 80, 34)  # wiggles closer to the line
+        u.waitForButton()
+        u.move_servo(c.servo_wrist, c.wrist_vertical, 10)
+        if c.is_prime:
+            d.timed_line_follow_left_right_side_line(1.5)
+        else:
+            d.timed_line_follow_left_right_side_line(1.85)  # line follows to get in perfect position
+        u.move_servo(c.servo_arm, c.armBinGrab, 15)
+
+
+
+def grab_bin():
+    u.move_servo(c.servo_claw, c.claw_bin, 10)
+    msleep(500)
+    u.move_servo(c.servo_arm, c.arm_up, 10)
+    g.drive_distance(-50, 10)
+    g.drive_distance(-50, 2.49)
+    g.turn_with_gyro(50, -50, 25)
+    g.drive_distance(-50, 1)
+    u.waitForButton()
+    u.move_servo(c.servo_arm, c.arm_down + 60, 20)
+
+
 def drive_to_valve():
     print("driving to valve")
     global left_burning
@@ -392,28 +445,6 @@ def drop_second_valve():
     # end of lego routine
     print("holding the second valve on the pipe")
 
-
-def drive_to_bin():
-    print("grabbing second valve")
-    msleep(100)
-    if c.is_prime:
-        g.turn_with_gyro(75, -75, 190)
-    else:
-        g.turn_with_gyro(75, -75, 195)  # 190
-    u.move_servo(c.servo_wrist, c.wrist_horizontal, 30)  # turns wrist horizontally
-    u.move_servo(c.servo_arm, c.arm_up, 20)
-    g.drive_distance(90, 8)
-    d.drive_to_black_and_square_up(-80)
-    g.drive_distance(70,9)
-    g.turn_with_gyro(-50,50,90)
-    g.drive_distance(-70, 19)
-    g.drive_distance(70,5.5)
-    g.pivot_on_right_wheel(70,94)
-    g.drive_condition(70,d.on_black_left, False)
-    u.move_servo(c.servo_arm, c.armBinGrab, 20)
-    u.move_servo(c.servo_wrist, c.wrist_vertical, 20)
-    u.move_servo(c.servo_claw, c.claw_open, 20)
-    g.drive_distance(55,5)
 
 def flip_bin_over():
     print("preparing to grab bin")
