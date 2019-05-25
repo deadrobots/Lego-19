@@ -38,8 +38,10 @@ if is_clone: # Yellow Lego
     arm_down = 180  # start position
     arm_valve_grab = 350
     arm_drop_off = 550
-    armValve = 1100
+    armValve = 1000
     armValveDrop = 660
+    armBinGrab = 163
+    armBinPickup = 945
 
     #wrist
     wrist_horizontal = 80    # pipe held vertically
@@ -49,6 +51,7 @@ if is_clone: # Yellow Lego
     #claw
     claw_open = 0
     claw_closed = 700
+    claw_bin = 860
     claw_valve = 850
 
     #gyro

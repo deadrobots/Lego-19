@@ -28,7 +28,6 @@ def main():
     a.grab_second_valve()
     a.drop_second_valve()
     u.DEBUGwithWait()
-    #a.flip_bin_over()
 
 
 if __name__ == "__main__":
