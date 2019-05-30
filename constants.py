@@ -79,6 +79,7 @@ if is_prime: # Red Lego
     # claw
     claw_open = 0  #150
     claw_closed = 1000
+    claw_bin = 1170 # Estimated
     claw_bin_closed = 1024
     claw_valve = 1100
 

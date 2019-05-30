@@ -268,9 +268,9 @@ def drive_to_valve():
         u.move_servo(c.servo_arm, c.arm_valve_grab, 10)
     else:
         u.move_servo(c.servo_arm, c.arm_valve_grab - 5, 10)
-    d.timed_line_follow_left_smooth(1.25)
+    d.timed_line_follow_left_smooth(1.25)  # do not edit distance bc.line follow is not messed up (due to perpendicular black line)
     g.drive_distance(80, 3.2)
-    d.timed_line_follow_left_smooth(1.65)
+    d.timed_line_follow_left_smooth(1.15)  # 1.45 was a bit too far
 
 
 def pick_up_valve():
@@ -351,10 +351,10 @@ def drop_first_valve():
     u.move_servo(c.servo_claw, c.claw_open, 20)
     u.move_servo(c.servo_arm, c.arm_drop_off , 20)  # slides the valve onto the pipe
     print("Delivered with a spin!")
-    if c.is_prime:
-        msleep(6000)  # pauses to keep from crashing into create
-    else:
-        msleep(6000)
+    # if c.is_prime:
+    #     msleep(6000)  # pauses to keep from crashing into create
+    # else:
+    #     msleep(6000)
     g.drive_distance(-90, 7)
 
 
