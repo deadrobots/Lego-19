@@ -1,6 +1,7 @@
 #!/usr/bin/python
 from wallaby import *
 import constants as c
+import gyroDrive as g
 
 
 def driveTimed(left, right, time):
@@ -98,4 +99,28 @@ def move_servo(servo, endPos, speed=10):
         msleep(10)
     set_servo_position(servo, endPos)
     msleep(10)
+
+def motor_calibration():
+    move_servo(c.servo_arm, c.arm_up)
+    msleep(1000)
+    g.calibrate_gyro()
+    print("Distance calibration:")
+    print("Place the robot square against some wall or edge, then")
+    waitForButton()
+    g.drive_distance(80, 30)
+    g.drive_timed(0,0)
+    print("Measure distance traveled.")
+    print("If greater than 30 inches, decrease inches-to-ticks value in gyroDrive")
+    print("If less than 30 inches, increase inches-to-ticks value")
+    print("---")
+    waitForButton()
+    print("Turning calibration:")
+    print("Orient the robot parallel to a tape line")
+    waitForButton()
+    g.turn_with_gyro(60, -60, 180)
+    g.drive_timed(0,0)
+    msleep(100)
+    print("If robot overturns, decrease turn_conversion in constants.")
+    print("If robot underturns, increase turn_conversion in constants.")
+    DEBUG()
 

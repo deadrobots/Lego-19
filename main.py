@@ -9,6 +9,7 @@ import gyroDrive as g
 
 
 def main():
+    #u.motor_calibration()
     a.init()
     c.start_time = seconds()
     a.grab_cluster()
