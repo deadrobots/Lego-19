@@ -123,8 +123,8 @@ def drop_off_cluster():
     d.square_up_black(-70, -70)
     msleep(50)
     g.drive_distance(70, 1)
-    if left_burning == 1:
-        g.turn_with_gyro(-25, 25, 2)
+    # if left_burning == 1:
+    #     g.turn_with_gyro(-25, 25, 2)   #with new claw design, this over rotates, so I'm commenting out
     u.move_servo(c.servo_arm, c.arm_drop_off, 8)  # drops off cluster
     u.move_servo(c.servo_claw, c.claw_open, 8)
     u.move_servo(c.servo_arm, c.arm_drop_off + 200, 5)
@@ -219,14 +219,16 @@ def drive_to_bin ():
         g.turn_with_gyro(-70, 70, 20)
         u.move_servo(c.servo_wrist, c.wrist_vertical, 10)
         if c.is_prime:
-            d.timed_line_follow_left_smooth(2)
+            d.timed_line_follow_left_right_side_line(3.5)
+            # g.turn_with_gyro(70, -70, 15)
             g.drive_distance(80, 3.2)
-            d.timed_line_follow_left_right_side_line(2.6)#2
+            u.move_servo(c.servo_arm, c.arm_valve_grab, 10)   #maybe omit if you need to cut more time
+            d.timed_line_follow_left_right_side_line(2.1)#2
             u.move_servo(c.servo_arm, c.armBinGrab, 15)
         else:
             d.timed_line_follow_left_right_side_line(3.5)
             g.drive_distance(80, 3.2)
-            u.move_servo(c.servo_arm, c.arm_valve_grab, 10)
+            u.move_servo(c.servo_arm, c.arm_valve_grab, 10)   #maybe omit if you need to cut more time
             d.timed_line_follow_left_right_side_line(2.1)
             u.move_servo(c.servo_arm, c.armBinGrab, 15)
         msleep(100)
