@@ -111,24 +111,33 @@ def drop_off_cluster():
         g.drive_distance(80, 4.5)
     else:
         print("right burning")
-        g.turn_with_gyro(0, 90, 60)  # wiggles to black line
+        g.turn_with_gyro(0, 90, 75)  # wiggles to black line
         g.drive_distance(95, 3)
-        g.turn_with_gyro(90, 0, 60)
+        g.turn_with_gyro(90, 0, 75)
         if c.is_prime:
             d.timed_line_follow_right_smooth(4.5)  # line follows until there is almost no space between it and the pipe
         else:
             d.timed_line_follow_right_smooth(4.8)
-        g.turn_with_gyro(-60, 60, 90)  # turns and squares up on black
-    g.drive_condition(-70, d.on_black_right or d.on_black_left, True)
-    d.square_up_black(-70, -70)
+        g.turn_with_gyro(-70, 70, 90)  # turns and squares up on black
+    g.drive_condition(-80, d.on_black_right or d.on_black_left, True)
+    d.square_up_black(-75, -75)
     msleep(50)
-    g.drive_distance(70, 1)
-    # if left_burning == 1:
-    #     g.turn_with_gyro(-25, 25, 2)   #with new claw design, this over rotates, so I'm commenting out
-    u.move_servo(c.servo_arm, c.arm_drop_off, 8)  # drops off cluster
-    u.move_servo(c.servo_claw, c.claw_open, 8)
-    u.move_servo(c.servo_arm, c.arm_drop_off + 200, 5)
-    u.move_servo(c.servo_arm, c.arm_up, 20)
+    g.drive_distance(85, 1)
+    if c.is_prime:
+        u.move_servo(c.servo_arm, c.arm_drop_off, 12)  # drops off cluster
+        u.move_servo(c.servo_claw, c.claw_open, 10)
+        u.move_servo(c.servo_arm, c.arm_drop_off + 200, 10)
+        u.move_servo(c.servo_arm, c.arm_up, 20)
+    else:
+        if left_burning == 1:
+            g.turn_with_gyro(-25, 25, 2)  # with new claw design, this over rotates, so I'm commenting out
+        u.move_servo(c.servo_arm, c.arm_drop_off, 12)  # drops off cluster
+        u.move_servo(c.servo_claw, c.claw_open, 10)
+        u.move_servo(c.servo_arm, c.arm_drop_off + 200, 10)
+        u.move_servo(c.servo_arm, c.arm_up, 20)
+        if left_burning == 1:
+            g.turn_with_gyro(25, -25, 2)  # with new claw design, this over rotates, so I'm commenting out
+
     print ("Delivered!")
     g.drive_distance(80, 1)
 
@@ -162,21 +171,21 @@ def pick_up_firetruck():
     if left_burning:
         print("left burning")
         if c.is_prime:
-            g.turn_with_gyro(-30, 30, 2)
+            g.turn_with_gyro(-70, 70, 2)
         else:
-            g.turn_with_gyro(-30, 30, 4)
+            g.turn_with_gyro(-70, 70, 4)
     else:
         print("right burning")
         if c.is_prime:
-            g.turn_with_gyro(-30, 30, 8)
+            g.turn_with_gyro(-70, 70, 8)
         else:
-            g.turn_with_gyro(-80, 80, 5.)
+            g.turn_with_gyro(-80, 80, 5)
     msleep(100)
-    g.drive_distance(-80, 2.5)
-    u.move_servo(c.servo_arm, c.arm_down, 15)
-    g.drive_distance(80, 2.5)
-    u.move_servo(c.servo_claw, c.claw_closed, 10)
-    u.move_servo(c.servo_arm, c.arm_up, 12)  # picks up firetruck
+    g.drive_distance(-90, 2.5)
+    u.move_servo(c.servo_arm, c.arm_down, 20)
+    g.drive_distance(90, 2.5)
+    u.move_servo(c.servo_claw, c.claw_closed, 13)
+    u.move_servo(c.servo_arm, c.arm_up, 17)  # picks up firetruck
 
 
 def drop_off_firetruck():
@@ -187,23 +196,23 @@ def drop_off_firetruck():
         d.drive_to_white_and_square_up(80)
         g.drive_distance(70, 0.5)
         g.turn_with_gyro(60, -60, 90)
-        d.drive_till_black_right(-70)
+        d.drive_till_black_right(-80)
         g.drive_distance(-80, 3)
-        u.move_servo(c.servo_arm, c.arm_down, 10)  # delivering firetruck
-        g.turn_with_gyro(50, -50, 10)
-        u.move_servo(c.servo_claw, c.claw_open, 6)
-        u.move_servo(c.servo_arm, c.arm_up, 12)
-        g.turn_with_gyro(-50, 50, 10)
+        u.move_servo(c.servo_arm, c.arm_down, 15)  # delivering firetruck
+        g.turn_with_gyro(70, -70, 10)
+        u.move_servo(c.servo_claw, c.claw_open, 10)
+        u.move_servo(c.servo_arm, c.arm_up, 14)
+        g.turn_with_gyro(-70, 70, 10)
     else:  # right building on fire
         print("right burning")
-        g.turn_with_gyro(-60, 60, 170)
-        g.drive_distance(80, 1)
+        g.turn_with_gyro(-70, 70, 170)
+        g.drive_distance(85, 1)
         g.turn_with_gyro(-80, 80, 2)
         g.drive_distance(90, 2)
         u.move_servo(c.servo_arm, c.arm_down, 15)  # delivering firetruck
         g.turn_with_gyro(-80, 80, 10)  # rotates closer to building
-        u.move_servo(c.servo_claw, c.claw_open, 12)
-        g.turn_with_gyro(40, -40, 5)
+        u.move_servo(c.servo_claw, c.claw_open, 15)
+        g.turn_with_gyro(70, -70, 5)
         u.move_servo(c.servo_arm, c.arm_up, 15)
         g.turn_with_gyro(80, -80, 10)  # rotates back
 
@@ -213,66 +222,71 @@ def drive_to_bin ():
     global left_burning
     if left_burning:
         print("left burning")
-        g.drive_distance(80, 6.5)
-        g.turn_with_gyro(70, -70, 120)  # turns to face valve
-        g.drive_distance(50, 3)
-        g.turn_with_gyro(-70, 70, 20)
-        u.move_servo(c.servo_wrist, c.wrist_vertical, 10)
-        if c.is_prime:
-            d.timed_line_follow_left_right_side_line(3.5)
-            # g.turn_with_gyro(70, -70, 15)
-            g.drive_distance(80, 3.2)
-            u.move_servo(c.servo_arm, c.arm_valve_grab, 10)   #maybe omit if you need to cut more time
-            d.timed_line_follow_left_right_side_line(2.1)#2
-            u.move_servo(c.servo_arm, c.armBinGrab, 15)
-        else:
-            d.timed_line_follow_left_right_side_line(3.5)
-            g.drive_distance(80, 3.2)
-            u.move_servo(c.servo_arm, c.arm_valve_grab, 10)   #maybe omit if you need to cut more time
-            d.timed_line_follow_left_right_side_line(2.1)
-            u.move_servo(c.servo_arm, c.armBinGrab, 15)
-        msleep(100)
+        g.drive_distance(85, 6.5)
+        g.turn_with_gyro(75, -75, 120)  # turns to face valve
+        g.drive_distance(80, 3)
+        g.turn_with_gyro(-75, 75, 20)
+        u.move_servo(c.servo_wrist, c.wrist_vertical, 30)
+        d.timed_line_follow_left_right_side_line(3.5)
+        g.drive_distance(85, 3.2)
+        u.move_servo(c.servo_arm, c.arm_valve_grab, 20)   #maybe omit if you need to cut more time
+        d.timed_line_follow_left_right_side_line(2.1)#2
+        ################################################################### Work in progress
+        g.drive_distance(-80, 2)
+        u.move_servo(c.servo_arm, c.arm_up, 20)
+        g.turn_with_gyro(-80, 80, 48)
+        u.move_servo(c.servo_arm, 320, 15)
+        g.drive_distance(80, 1.5)
+        g.drive_distance(30, .8)
+        ###################################################################
+        #u.move_servo(c.servo_arm, c.armBinGrab, 15)
+        msleep(50)
     else:  # right burning
         print ("right burning")
-        g.turn_with_gyro(80, -80, 34)
-        if c.is_prime:
-            g.drive_distance(80, 7.1)
-        else:
-            g.drive_distance(80, 7.1)
-        g.drive_distance(80, 2)
+        g.turn_with_gyro(85, -85, 34)
+        g.drive_distance(85, 7.1)
+        g.drive_distance(85, 2)
         g.turn_with_gyro(0, 80, 34)  # wiggles closer to the line
-        u.move_servo(c.servo_wrist, c.wrist_vertical, 10)
+        u.move_servo(c.servo_wrist, c.wrist_vertical, 35)
         d.timed_line_follow_left_right_side_line(2)  # line follows to get in perfect position
-        u.move_servo(c.servo_arm, c.armBinGrab, 15)
+        u.move_servo(c.servo_arm, c.armBinGrab, 20)
         d.timed_line_follow_left_right_side_line(.9)
 
 
 def grab_bin():
-    msleep(500)
-    u.move_servo(c.servo_claw, c.claw_bin, 10)
-    msleep(500)
-    u.move_servo(c.servo_arm, c.arm_up, 10)
-    g.drive_distance(-50, 13.5)
-    g.turn_with_gyro(50, -50, 90)
-    u.move_servo(c.servo_arm, c.arm_down + 60, 10)
-    u.move_servo(c.servo_claw, c.claw_open, 10)
-    msleep(250)
-    u.move_servo(c.servo_arm, c.arm_up, 10)
+    msleep(50)
+    u.move_servo(c.servo_claw, c.claw_bin, 18)
+    msleep(100)
+    u.move_servo(c.servo_arm, c.arm_up, 22)
+    ##################################################### Work in progress
+    g.drive_distance(-80, 2.2)
+    g.turn_with_gyro(80, -80, 48)
+    g.drive_distance(80, 2)
+    #####################################################
+    g.drive_distance(-85, 13.5)
+    g.turn_with_gyro(70, -70, 90)
+    u.move_servo(c.servo_arm, c.arm_down + 60, 15)
+    u.move_servo(c.servo_claw, c.claw_open, 15)
+    msleep(50)
+    u.move_servo(c.servo_arm, c.arm_up, 15)
 
 
 def drive_to_valve():
     print("driving to valve")
     g.pivot_on_right_wheel(-50, 90)
     msleep(100)
-    u.move_servo(c.servo_arm, c.arm_up, 10)
-    u.move_servo(c.servo_wrist, c.wrist_horizontal, 10)
+    u.move_servo(c.servo_arm, c.arm_up, 20)
+    u.move_servo(c.servo_wrist, c.wrist_horizontal, 30)
     if c.is_prime:
         u.move_servo(c.servo_arm, c.arm_valve_grab, 10)
     else:
         u.move_servo(c.servo_arm, c.arm_valve_grab - 5, 10)
     d.timed_line_follow_left_smooth(1.25)  # do not edit distance bc.line follow is not messed up (due to perpendicular black line)
     g.drive_distance(80, 3.2)
-    d.timed_line_follow_left_smooth(1.15)  # 1.45 was a bit too far
+    if c.is_prime:
+        d.timed_line_follow_left_smooth(1.15)  # 1.45 was a bit too far
+    else:
+        d.timed_line_follow_left_smooth(1.40)
 
 
 def pick_up_valve():
@@ -300,14 +314,14 @@ def pick_up_valve():
 
 def driveToGasLine():
     u.move_servo(c.servo_arm, 1400, 15)
-    msleep(200)
+    msleep(100)
     if c.is_prime:
         g.pivot_on_left_wheel(-85, 97)
         msleep(1200)  # pause for choreography
         g.drive_distance(95, 55.5)
     else:
         g.pivot_on_left_wheel(-85, 96)
-        msleep(500)
+        msleep(100)
         g.drive_distance(95, 58)
 
 
@@ -325,7 +339,7 @@ def drop_first_valve():
     g.turn_with_gyro(70, -70, 90)
     msleep(100)
     d.drive_to_black_and_square_up(80)
-    g.drive_distance(70, .5)
+    g.drive_distance(85, .5)
     d.drive_to_white_and_square_up(80)  # squares up on the little line perpendicular to the wall
     msleep(100)
     g.drive_distance(-60, 3.1)
@@ -400,23 +414,24 @@ def drop_second_valve():
     g.drive_distance(85, 5)
     g.turn_with_gyro(80, -80, 90)
     d.drive_to_black_and_square_up(80)
+    g.drive_distance(85, .5)
     d.drive_to_white_and_square_up(80)
     u.move_servo(c.servo_arm, c.arm_up, 15)
-    g.drive_distance(-50, 3.1)
+    g.drive_distance(-70, 3.1)
     msleep(100)
-    g.turn_with_gyro(50, -50, 90)
+    g.turn_with_gyro(70, -70, 90)
     msleep(100)
     if c.is_prime:
         g.drive_distance(-50, 4.4)
     else:
-        g.drive_distance(-50, 3.9)  # 4.2
+        g.drive_distance(-80, 3.9)  # 4.2
     msleep(100)
-    g.turn_with_gyro(30, -30, 25)
+    g.turn_with_gyro(50, -50, 25)
     u.move_servo(c.servo_arm, c.armValveDrop, 20)
     u.move_servo(c.servo_wrist, c.wrist_vertical, 20)
-    g.turn_with_gyro(-30, 30, 20)
-    g.drive_distance(50, .25)
-    g.turn_with_gyro(-30, 30, 10)  # drops off on the same side as the first valve, holds valve in scoring position
+    g.turn_with_gyro(-50, 50, 20)
+    g.drive_distance(75, .25)
+    g.turn_with_gyro(-50, 50, 10)  # drops off on the same side as the first valve, holds valve in scoring position
     # end of lego routine
     print("holding the second valve on the pipe")
 
@@ -426,7 +441,7 @@ def flip_bin_over():
     u.waitForButton()  #for now, place bin after arm sets up for grab
     print("picking up bin")
     u.move_servo(c.servo_arm, c.armBinPickup, 20)
-    msleep(500)
+    msleep(200)
     u.move_servo(c.servo_claw, c.claw_bin, 20)
     msleep(200)
     u.move_servo(c.servo_arm, c.armBinPickup, 10)
