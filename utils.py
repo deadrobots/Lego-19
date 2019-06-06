@@ -2,6 +2,7 @@
 from wallaby import *
 import constants as c
 import gyroDrive as g
+import threading as t
 
 
 def driveTimed(left, right, time):
@@ -124,3 +125,12 @@ def motor_calibration():
     print("If robot underturns, increase turn_conversion in constants.")
     DEBUG()
 
+
+def thread_servo(servo, pos, speed):
+    x = lambda : move_servo(servo, pos, speed)
+    t.Thread(name = 'daemon', target = x).start()
+
+
+def thread_anything(funk, *args, **kwargs):
+    x = lambda: funk(*args, **kwargs)
+    t.Thread(name='daemon', target=x).start()
