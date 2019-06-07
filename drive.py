@@ -206,7 +206,7 @@ def drive_to_black_and_square_up(speed):
     g.drive_condition(speed, on_white_left_and_right, True)    # Drives while neither tophat sees black
     print('SAW BLACK!!!', on_black_left(), on_black_right())
     d.square_up_black(speed/2, speed/2)
-    msleep(250)
+    # msleep(250)
 
 
 def on_white_left_and_right():
@@ -219,7 +219,7 @@ def drive_to_white_and_square_up(speed):
     g.drive_distance(50, 0.5)
     d.square_up_black(-50, -50)
     g.drive_distance(50, 0.25)
-    msleep(250)
+    # msleep(250)
 
 
 def drive_till_black_right(speed):
