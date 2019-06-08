@@ -6,6 +6,7 @@ start_time = -1
 # Digital ports
 CLONE_SWITCH = 9
 RIGHT_BUTTON = 13
+LEFT_BUTTON = 14
 BUTTON = 0
 
 #Prime/Clone

@@ -10,12 +10,15 @@ import threading as t
 
 left_burning = 1
 
+seeding = True
+
 
 def init():
     # Prime Setup:
     # The square up surface on the back of the bot should be flush to the back of the SB
     # The left edge of the square up surface should be just to the left of the coupler
     # Just use the marks on the table :)
+    global seeding
     if c.is_clone:
         print("Hi! I'm Clone.")
     else:
@@ -57,6 +60,18 @@ def init():
     print("testing arm")
     u.move_servo(c.servo_arm, c.arm_up, 10)
     u.move_servo(c.servo_arm, c.arm_down, 5)
+    print("Press right button for head 2 head or left for seeding")
+    while True:
+        if digital(c.RIGHT_BUTTON) == 1:
+            print("Head 2 head")
+            seeding = False
+            break
+        if left_button() == 1:
+            print("Seeding")
+            seeding = True
+            break
+        msleep(10)
+    msleep(500)
     print("place in start posistion")
     ao()
     #u.wait_4_light()
@@ -82,6 +97,7 @@ def grab_cluster():
     u.move_servo(c.servo_claw, c.claw_closed, 12)
     u.thread_servo(c.servo_arm, c.arm_valve_grab, 15)
     g.drive_distance(80, 2)
+
 
 def drive_to_MC():
     #Drives towards both medical centers
@@ -222,7 +238,7 @@ def drop_off_firetruck():
         g.turn_with_gyro(80, -80, 10)  # rotates back
 
 
-def drive_to_bin ():
+def drive_to_bin():
     print("driving to bin")
     global left_burning
     if left_burning:
@@ -276,7 +292,7 @@ def grab_bin():
     u.move_servo(c.servo_arm, c.arm_up, 15)
 
 
-def drive_to_valve():
+def drive_to_valve_seeding():
     print("driving to valve")
     g.pivot_on_right_wheel(-70, 90)
     msleep(100)
@@ -292,6 +308,42 @@ def drive_to_valve():
         d.timed_line_follow_left_smooth(1.15)  # 1.45 was a bit too far
     else:
         d.timed_line_follow_left_smooth(1.40)
+
+
+def drive_to_valve_h2h():
+    print("driving to valve")
+    global left_burning
+    if left_burning:
+        print("left burning")
+        g.drive_distance(80, 6.5)       #drives forward a bit after dropping off firetruck
+        g.turn_with_gyro(70, -70, 90)       #turns to face valve
+        u.move_servo(c.servo_arm, c.arm_valve_grab, 15)
+        if c.is_prime:
+            u.move_servo(c.servo_wrist, c.wrist_horizontal, 15)
+            d.timed_line_follow_left_smooth(2)
+            g.drive_distance(80, 3.2)
+            d.timed_line_follow_left_smooth(2.2) #2
+        else:
+            g.drive_distance(80, 9)
+            u.move_servo(c.servo_wrist, c.wrist_horizontal, 15)
+            d.timed_line_follow_left_smooth(1.9)  #2    # line follows to get in perfect position
+        msleep(100)
+    else:                   #right burning
+        print ("right burning")
+        g.turn_with_gyro(80, -80, 34)
+        if c.is_prime:
+            g.drive_distance(80, 7.1)
+        else:
+            g.drive_distance(80, 7.1)
+        g.turn_with_gyro(-80, 80, 34)           # wiggles closer to the line
+        g.drive_distance(-80, 2)
+        u.move_servo(c.servo_arm, c.arm_valve_grab, 20)
+        if c.is_prime:
+            d.timed_line_follow_left_smooth(1.5)
+        else:
+            d.timed_line_follow_left_smooth(1)            # line follows to get in perfect position
+        g.turn_with_gyro(-80, 80, 5)            # turns in a little to grab the valve easier
+        g.drive_distance(80, .4)
 
 
 def pick_up_valve():
@@ -325,7 +377,7 @@ def driveToGasLine():
         msleep(100)  # pause for choreography
         g.drive_distance(95, 55.5)
     else:
-        g.pivot_on_left_wheel(-85, 96)
+        g.pivot_on_left_wheel(-85, 93)
         msleep(100)
         g.drive_distance(95, 58)
 
@@ -357,7 +409,7 @@ def drop_first_valve():
     else:
         g.turn_with_gyro(50, -50, 90)
         msleep(100)
-        g.drive_distance(-50, 4.4)  # 4.6
+        g.drive_distance(-50, 4.8)  # 4.4
         msleep(100)
         g.turn_with_gyro(30, -30, 15)  # 10 # turns slightly to make sure there is enough space to drop the arm
     u.move_servo(c.servo_arm, c.armValveDrop, 20)
