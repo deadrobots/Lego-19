@@ -453,7 +453,7 @@ def grab_second_valve():
         g.drive_distance(90, 5)  # lego drove towards orange valve before turning
         g.turn_with_gyro(70, -70, 22)  # 17 gave problem twice
         u.move_servo(c.servo_arm, c.arm_valve_grab, 20)
-        g.drive_distance(85, 5.9)
+        g.drive_distance(85, 6.1)  #5.9 came up short
         g.turn_with_gyro(-60, 60, 8)
     u.move_servo(c.servo_claw, c.claw_valve, 20)
     u.move_servo(c.servo_arm, c.arm_drop_off, 20)
