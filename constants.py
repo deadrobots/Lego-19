@@ -15,10 +15,7 @@ is_prime = not is_clone
 
 # motor values
 LEFT_MOTOR = 0
-if is_prime:
-    RIGHT_MOTOR = 3
-else:
-    RIGHT_MOTOR = 2
+RIGHT_MOTOR = 3
 
 #Analog ports
 FRONT_TOPHAT_RIGHT = 0  # analog
