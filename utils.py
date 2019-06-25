@@ -108,7 +108,7 @@ def motor_calibration():
     print("Distance calibration:")
     print("Place the robot square against some wall or edge, then")
     waitForButton()
-    g.drive_distance(80, 30)
+    g.drive_distance(99, 30)
     g.drive_timed(0,0)
     print("Measure distance traveled.")
     print("If greater than 30 inches, decrease inches-to-ticks value in gyroDrive")

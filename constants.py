@@ -53,7 +53,7 @@ if is_clone: # Yellow Lego
     claw_valve = 850
 
     #gyro
-    turn_conversion = 5260
+    turn_conversion = 5300 #5260
 
 if is_prime: # Red Lego
     # arm

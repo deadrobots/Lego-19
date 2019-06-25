@@ -60,7 +60,7 @@ def init():
     print("testing arm")
     u.move_servo(c.servo_arm, c.arm_up, 10)
     u.move_servo(c.servo_arm, c.arm_down, 5)
-    print("Press right button for head 2 head or left for seeding")
+    '''print("Press right button for head 2 head or left for seeding")
     while True:
         if digital(c.RIGHT_BUTTON) == 1:
             print("Head 2 head")
@@ -70,12 +70,13 @@ def init():
             print("Seeding")
             seeding = True
             break
-        msleep(10)
+        msleep(10)'''
+    seeding = True
     msleep(500)
     print("place in start posistion")
     ao()
-    #u.wait_4_light()
-    u.waitForButton()
+    u.wait_4_light()
+    #u.waitForButton()
     # shut_down_in(119.2)
     g.calibrate_gyro()
 
@@ -105,10 +106,11 @@ def drive_to_MC():
     if c.is_prime:
         g.pivot_on_left_wheel(90, 92)
     else:
-        g.pivot_on_left_wheel(90, 93)
+        g.pivot_on_left_wheel(90, 95)
     # u.move_servo(c.servo_arm, c.arm_up)
     #u.thread_servo(c.servo_arm, c.arm_up, 10)
-    u.thread_anything(u.move_servo, c.servo_arm, c.arm_up, 10)
+    u.move_servo(c.servo_arm, c.arm_up, 10)
+    msleep(100)
     g.drive_distance(95, 19)
     d.drive_to_black_and_square_up(50)  # squaring up on line next to water block
     g.drive_distance(-90, 3.5)
@@ -282,17 +284,15 @@ def grab_bin():
         u.move_servo(c.servo_arm, c.arm_up, 22)
     else:
         u.move_servo(c.servo_arm, c.arm_up, 15) #22
-    # ##################################################### Work in progress
-    # g.drive_distance(-80, 2.2)
-    # g.turn_with_gyro(80, -80, 48)
-    # g.drive_distance(80, 2)
-    # #####################################################
     g.drive_distance(-100, 13.5)
-    g.turn_with_gyro(70, -70, 90)
+    #g.turn_with_gyro(70, -70, 75)
+    g.turn_with_gyro(-70, 70, 95)##################
     u.move_servo(c.servo_arm, c.arm_down + 60, 15)
     u.move_servo(c.servo_claw, c.claw_open, 15)
+    #g.turn_with_gyro(70, -70, 15)
     msleep(50)
     u.move_servo(c.servo_arm, c.arm_up, 15)
+    g.turn_with_gyro(-70, 70, 175)#################
 
 
 def drive_to_valve_seeding():
@@ -308,7 +308,7 @@ def drive_to_valve_seeding():
     d.timed_line_follow_left_smooth(1.25)  # do not edit distance bc.line follow is not messed up (due to perpendicular black line)
     g.drive_distance(80, 3.2)
     if c.is_prime:
-        d.timed_line_follow_left_smooth(1.15)  # 1.45 was a bit too far
+        d.timed_line_follow_left_smooth(1.3)  #1.15 # 1.45 was a bit too far
     else:
         d.timed_line_follow_left_smooth(1.40)
 
@@ -367,7 +367,7 @@ def pick_up_valve():
     d.drive_to_black_and_square_up(-70)
 
     if c.is_prime:
-        g.drive_distance(-70, .7)
+        g.drive_distance(-70, 1.7)#.7
     else:
         g.drive_distance(-70, 1.5)
 
@@ -434,7 +434,6 @@ def drop_first_valve():
     u.move_servo(c.servo_claw, c.claw_open, 20)
     u.move_servo(c.servo_arm, c.arm_drop_off , 20)  # slides the valve onto the pipe
     print("Delivered with a spin!")
-    u.DEBUG()
     # if c.is_prime:
     #     msleep(6000)  # pauses to keep from crashing into create
     # else:
@@ -450,7 +449,7 @@ def grab_second_valve():
     else:
         g.turn_with_gyro(75, -75, 195)  #190
     set_servo_position(c.servo_wrist, c.wrist_horizontal)  # turns wrist horizontally
-    u.thread_servo(c.servo_arm, c.arm_up, 20)
+    u.thread_servo(c.servo_arm, c.arm_up, 25)
     g.drive_distance(90, 8)
     d.drive_to_black_and_square_up(-80)
     if c.is_prime:
