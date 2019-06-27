@@ -60,17 +60,6 @@ def init():
     print("testing arm")
     u.move_servo(c.servo_arm, c.arm_up, 10)
     u.move_servo(c.servo_arm, c.arm_down, 5)
-    '''print("Press right button for head 2 head or left for seeding")
-    while True:
-        if digital(c.RIGHT_BUTTON) == 1:
-            print("Head 2 head")
-            seeding = False
-            break
-        if left_button() == 1:
-            print("Seeding")
-            seeding = True
-            break
-        msleep(10)'''
     seeding = True
     msleep(500)
     print("place in start posistion")
@@ -106,7 +95,7 @@ def drive_to_MC():
     if c.is_prime:
         g.pivot_on_left_wheel(90, 92)
     else:
-        g.pivot_on_left_wheel(90, 95)
+        g.pivot_on_left_wheel(90, 92)
     # u.move_servo(c.servo_arm, c.arm_up)
     #u.thread_servo(c.servo_arm, c.arm_up, 10)
     u.move_servo(c.servo_arm, c.arm_up, 10)
@@ -178,8 +167,8 @@ def drive_to_firetruck():
             g.pivot_on_left_wheel(90, 88)
             d.drive_to_white_and_square_up(95)
         else:
-            g.pivot_on_left_wheel(90, 90)
-            d.drive_to_black_and_square_up(95)
+            g.pivot_on_left_wheel(90, 88)#90
+            #d.drive_to_black_and_square_up(95)
             d.drive_to_white_and_square_up(95)
         g.drive_distance(95, 9)#
         d.drive_to_black_and_square_up(95)  # True #drives until the black line at the end of the medical center
@@ -194,7 +183,8 @@ def pick_up_firetruck():
         if c.is_prime:
             g.turn_with_gyro(-70, 70, 2)
         else:
-            g.turn_with_gyro(-70, 70, 4)
+            pass
+            #g.turn_with_gyro(-70, 70, 1)#4
     else:
         print("right burning")
         if c.is_prime:
@@ -254,14 +244,6 @@ def drive_to_bin():
         g.drive_distance(85, 3.2)
         u.move_servo(c.servo_arm, c.arm_valve_grab, 30)   #maybe omit if you need to cut more time
         d.timed_line_follow_left_right_side_line(2.1)#2
-        # ################################################################### Work in progress
-        # g.drive_distance(-80, 2)
-        # u.move_servo(c.servo_arm, c.arm_up, 20)
-        # g.turn_with_gyro(-80, 80, 48)
-        # u.move_servo(c.servo_arm, 320, 15)
-        # g.drive_distance(80, 1.5)
-        # g.drive_distance(30, .8)
-        # ###################################################################
         u.move_servo(c.servo_arm, c.armBinGrab, 25)
         msleep(50)
     else:  # right burning
@@ -285,14 +267,12 @@ def grab_bin():
     else:
         u.move_servo(c.servo_arm, c.arm_up, 15) #22
     g.drive_distance(-100, 13.5)
-    #g.turn_with_gyro(70, -70, 75)
-    g.turn_with_gyro(-70, 70, 95)##################
+    g.turn_with_gyro(-70, 70, 110)
     u.move_servo(c.servo_arm, c.arm_down + 60, 15)
     u.move_servo(c.servo_claw, c.claw_open, 15)
-    #g.turn_with_gyro(70, -70, 15)
     msleep(50)
     u.move_servo(c.servo_arm, c.arm_up, 15)
-    g.turn_with_gyro(-70, 70, 175)#################
+    g.turn_with_gyro(-70, 70, 160)
 
 
 def drive_to_valve_seeding():
@@ -352,10 +332,7 @@ def drive_to_valve_h2h():
 def pick_up_valve():
     print("picking up valve")
     g.turn_with_gyro(-60, 60, 2)
-    if c.is_prime:
-        g.drive_distance(80, .3)
-    else:
-        pass
+    g.drive_distance(80, .3)
     u.move_servo(c.servo_claw, c.claw_valve, 20)
     u.move_servo(c.servo_arm, c.arm_drop_off, 20)
     g.drive_distance(70, 0.5)
@@ -369,7 +346,7 @@ def pick_up_valve():
     if c.is_prime:
         g.drive_distance(-70, 1.7)#.7
     else:
-        g.drive_distance(-70, 1.5)
+        g.drive_distance(-70, 2)#1.5
 
 
 def driveToGasLine():

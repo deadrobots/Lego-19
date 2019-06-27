@@ -33,12 +33,12 @@ servo_claw = 3     #switched from 2 due to broken port
 if is_clone: # Yellow Lego
     #arm
     arm_up = 1420
-    arm_down = 180  # start position
-    arm_valve_grab = 350
+    arm_down = 210  # start position
+    arm_valve_grab = 355
     arm_drop_off = 550
-    armValve = 1000
-    armValveDrop = 660
-    armBinGrab = 163
+    armValve = 1100
+    armValveDrop = 695
+    armBinGrab = 215
     armBinPickup = 945
 
     #wrist
@@ -48,9 +48,9 @@ if is_clone: # Yellow Lego
 
     #claw
     claw_open = 0
-    claw_closed = 700
-    claw_bin = 860
-    claw_valve = 850
+    claw_closed = 1000 #700
+    claw_bin = 1170 #860
+    claw_valve = 1100 #850
 
     #gyro
     turn_conversion = 5300 #5260
@@ -82,4 +82,4 @@ if is_prime: # Red Lego
     claw_valve = 1100
 
     # gyro
-    turn_conversion = 5180 #5150
+    turn_conversion = 5170 #5150
