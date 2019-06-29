@@ -277,7 +277,7 @@ def grab_bin():
 
 def drive_to_valve_seeding():
     print("driving to valve")
-    g.pivot_on_right_wheel(-70, 90)
+    g.pivot_on_right_wheel(-70, 90) #-70, 90
     msleep(100)
     u.move_servo(c.servo_arm, c.arm_up, 30)
     set_servo_position(c.servo_wrist, c.wrist_horizontal)
@@ -286,14 +286,15 @@ def drive_to_valve_seeding():
     else:
         u.move_servo(c.servo_arm, c.arm_valve_grab - 5, 30)
     d.timed_line_follow_left_smooth(1.25)  # do not edit distance bc.line follow is not messed up (due to perpendicular black line)
-    g.drive_distance(80, 3.2)
     if c.is_prime:
+        g.drive_distance(80, 4.3)
         d.timed_line_follow_left_smooth(1.3)  #1.15 # 1.45 was a bit too far
     else:
+        g.drive_distance(80, 3.2)
         d.timed_line_follow_left_smooth(1.40)
 
 
-def drive_to_valve_h2h():
+'''def drive_to_valve_h2h():
     print("driving to valve")
     global left_burning
     if left_burning:
@@ -326,7 +327,7 @@ def drive_to_valve_h2h():
         else:
             d.timed_line_follow_left_smooth(1)            # line follows to get in perfect position
         g.turn_with_gyro(-80, 80, 5)            # turns in a little to grab the valve easier
-        g.drive_distance(80, .4)
+        g.drive_distance(80, .4)'''
 
 
 def pick_up_valve():
@@ -404,7 +405,7 @@ def drop_first_valve():
     g.turn_with_gyro(-30, 30, 20)
     if c.is_prime:
         g.drive_distance(50, .4)
-        g.turn_with_gyro(-30, 30, 15)
+        g.turn_with_gyro(-30, 30, 20)#15
     else:
         g.drive_distance(50, .25)
         g.turn_with_gyro(-30, 30, 10)

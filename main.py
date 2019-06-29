@@ -24,12 +24,9 @@ def main():
     a.drive_to_firetruck()
     a.pick_up_firetruck()
     a.drop_off_firetruck()
-    if a.seeding:
-        a.drive_to_bin()
-        a.grab_bin()
-        a.drive_to_valve_seeding()
-    else:
-        a.drive_to_valve_h2h()
+    a.drive_to_bin()
+    a.grab_bin()
+    a.drive_to_valve_seeding()
     a.pick_up_valve()
     a.driveToGasLine()
     a.drop_first_valve()
