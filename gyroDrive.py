@@ -7,7 +7,7 @@ import utils as u
 if c.is_prime:
     INCHES_TO_TICKS = 209 #222 #195
 else:
-    INCHES_TO_TICKS = 215 #193
+    INCHES_TO_TICKS = 217 #193
 
 
 bias = 0

@@ -238,8 +238,12 @@ def drive_to_bin():
         print("left burning")
         g.drive_distance(85, 6.5)
         g.turn_with_gyro(85, -85, 120)  # turns to face valve
-        g.drive_distance(80, 3)
-        g.turn_with_gyro(-85, 85, 20)
+        if c.is_prime:
+            g.drive_distance(80, 3)
+            g.turn_with_gyro(-85, 85, 20)
+        else:
+            g.drive_distance(80, 2.3)
+            g.turn_with_gyro(-85, 85, 28)
         set_servo_position(c.servo_wrist, c.wrist_vertical)
         d.timed_line_follow_left_right_side_line(3.5)
         g.drive_distance(85, 3.2)
@@ -251,12 +255,19 @@ def drive_to_bin():
         print ("right burning")
         g.turn_with_gyro(85, -85, 34)
         g.drive_distance(85, 7.1)
-        g.drive_distance(85, 2)
-        g.turn_with_gyro(0, 80, 34)  # wiggles closer to the line
+        if c.is_prime:
+            g.drive_distance(85, 2)
+            g.turn_with_gyro(0, 80, 34)  # wiggles closer to the line
+        else:
+            g.drive_distance(85, 1.5)
+            g.turn_with_gyro(0, 80, 38)
         set_servo_position(c.servo_wrist, c.wrist_vertical)
         d.timed_line_follow_left_right_side_line(2)  # line follows to get in perfect position
         u.move_servo(c.servo_arm, c.armBinGrab, 25)
-        d.timed_line_follow_left_right_side_line(.9)
+        if c.is_prime:
+            d.timed_line_follow_left_right_side_line(.9)
+        else:
+            d.timed_line_follow_left_right_side_line(1.2)
 
 
 def grab_bin():
@@ -290,13 +301,14 @@ def drive_to_valve_seeding():
         u.move_servo(c.servo_arm, c.arm_valve_grab, 30)
     else:
         u.move_servo(c.servo_arm, c.arm_valve_grab - 5, 30)
-    d.timed_line_follow_left_smooth(1) #1.25  # do not edit distance bc.line follow is not messed up (due to perpendicular black line)
     if c.is_prime:
+        d.timed_line_follow_left_smooth(1)  # 1.25  # do not edit distance bc.line follow is not messed up (due to perpendicular black line)
         g.drive_distance(80, 2.6)
         d.timed_line_follow_left_smooth(1)  #1.15 # 1.45 was a bit too far
     else:
-        g.drive_distance(80, 2.6)
-        d.timed_line_follow_left_smooth(1.40)
+        d.timed_line_follow_left_smooth(.2)  # 1.25  # do not edit distance bc.line follow is not messed up (due to perpendicular black line)
+        g.drive_distance(80, 2.9)
+        d.timed_line_follow_left_smooth(1.70)
 
 
 def pick_up_valve():
@@ -330,7 +342,7 @@ def driveToGasLine():
             msleep(100)
         g.drive_distance(100, 55.5)#95
     else:
-        g.pivot_on_left_wheel(-85, 93)
+        g.pivot_on_left_wheel(-85, 91)
         if left_burning:
             msleep(4900)
         else:
@@ -410,7 +422,7 @@ def grab_second_valve():
         g.drive_distance(60, .6)#.4
     else:
         g.drive_distance(90, 5)  # lego drove towards orange valve before turning
-        g.turn_with_gyro(70, -70, 22)  # 17 gave problem twice
+        g.turn_with_gyro(70, -70, 18)  #22 # 17 gave problem twice
         u.move_servo(c.servo_arm, c.arm_valve_grab, 20)
         g.drive_distance(85, 6.1)  #5.9 came up short
         g.turn_with_gyro(-60, 60, 8)

@@ -32,18 +32,19 @@ servo_claw = 3     #switched from 2 due to broken port
 
 if is_clone: # Yellow Lego
     #arm
-    arm_up = 1420
-    arm_down = 210  # start position
-    arm_valve_grab = 355
-    arm_drop_off = 550
-    armValve = 1100
-    armValveDrop = 695
+    arm_offset = -50
+    arm_up = 1420 + arm_offset
+    arm_down = 210 + arm_offset  # start position
+    arm_valve_grab = 355 - 15
+    arm_drop_off = 550 + arm_offset
+    armValve = 1100 + arm_offset
+    armValveDrop = 695 - 15
     armBinGrab = 215
-    armBinPickup = 945
+    armBinPickup = 945 + arm_offset
 
     #wrist
-    wrist_horizontal = 80    # pipe held vertically
-    wrist_vertical = 1250  # pipe held horizontally
+    wrist_horizontal = 150 #80    # pipe held vertically
+    wrist_vertical = 1290 #1250  # pipe held horizontally
     wristFlipped = 2040
 
     #claw
