@@ -66,7 +66,7 @@ def init():
     ao()
     u.wait_4_light()
     #u.waitForButton()
-    # shut_down_in(119.2)
+    shut_down_in(119.2)
     g.calibrate_gyro()
 
 
@@ -299,16 +299,14 @@ def drive_to_valve_seeding():
     set_servo_position(c.servo_wrist, c.wrist_horizontal)
     if c.is_prime:
         u.move_servo(c.servo_arm, c.arm_valve_grab, 30)
-    else:
-        u.move_servo(c.servo_arm, c.arm_valve_grab - 5, 30)
-    if c.is_prime:
         d.timed_line_follow_left_smooth(1)  # 1.25  # do not edit distance bc.line follow is not messed up (due to perpendicular black line)
         g.drive_distance(80, 2.6)
         d.timed_line_follow_left_smooth(1)  #1.15 # 1.45 was a bit too far
     else:
+        u.move_servo(c.servo_arm, c.arm_valve_grab - 5, 30)
         d.timed_line_follow_left_smooth(.2)  # 1.25  # do not edit distance bc.line follow is not messed up (due to perpendicular black line)
         g.drive_distance(80, 2.9)
-        d.timed_line_follow_left_smooth(1.70)
+        d.timed_line_follow_left_smooth(1.35 )#1.7
 
 
 def pick_up_valve():
